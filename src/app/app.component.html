@@ -9,10 +9,12 @@
         </div>
     </div>
     <div>
-        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/']">Home</a>
-        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Directors</a>
-        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Oscars</a>
-        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Theaters</a>
+        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+true}" [routerLink]="['/']">Home</a>
+        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/directors']">Directors</a>
+        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/filming']">Filming</a>
+        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/theaters']">Theaters</a>
+        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/oscars']">Oscars</a>
     </div>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">

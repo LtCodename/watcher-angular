@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DirectorsService } from '../services/directors.service';
 import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
+import { IDirector } from "../directors.model";
 
 @Component({
     selector: 'app-directors-page',
@@ -10,7 +11,7 @@ import { map, mergeMap, takeUntil } from "rxjs/operators";
 })
 export class DirectorsPageComponent implements OnInit, OnDestroy {
     private notifier = new Subject();
-    directors = [];
+    directors: IDirector[] = [];
     showSpinner = true;
 
     constructor(private directorsService: DirectorsService) {
@@ -20,7 +21,7 @@ export class DirectorsPageComponent implements OnInit, OnDestroy {
                 mergeMap((directorData) => this.directorsService.getMovies().pipe(map((movieData) => [directorData, movieData])))
             )
             .subscribe(([directorData, movieData]) => {
-                directorData.forEach((director) => {
+                directorData.forEach((director: IDirector) => {
                     director.movies = movieData.filter(movie => movie.director === director.id);
                 });
 

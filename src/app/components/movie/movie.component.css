@@ -1,0 +1,8 @@
+mat-card {
+    margin-bottom: 10px;
+    max-width: 278px;
+}
+
+mat-card-title {
+    line-height: initial;
+}

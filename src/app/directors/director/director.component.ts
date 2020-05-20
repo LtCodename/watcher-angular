@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { IMovie } from '../directors.model';
 
 @Component({
   selector: 'app-director',
@@ -11,7 +12,7 @@ export class DirectorComponent implements OnInit, OnChanges {
 
   @Input() name: string;
   @Input() id: string;
-  @Input() movies: any[] = [];
+  @Input() movies: IMovie[] = [];
 
   constructor() { }
 
@@ -33,7 +34,7 @@ export class DirectorComponent implements OnInit, OnChanges {
   }
 
   calculatePercentage(): void {
-    const watched = this.movies.filter((elem:any) => elem.watched);
+    const watched = this.movies.filter((elem: IMovie) => elem.watched);
     const percentageRaw = ((watched.length * 100) / this.movies.length) || 0;
     this.percentage = Number(Math.round(percentageRaw));
   }
