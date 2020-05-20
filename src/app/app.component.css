@@ -4,6 +4,12 @@
 
 .nav-link {
     padding: 0 5px;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline #FFFFFF;
 }
 
 .page-content-wrapper {
@@ -14,3 +20,10 @@
     margin-right: 10px;
 }
 
+.nav-bar {
+    justify-content: space-between;
+}
+
+.add-panel-wrapper {
+    padding: 10px;
+}

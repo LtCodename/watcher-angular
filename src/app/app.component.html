@@ -1,20 +1,28 @@
+<mat-toolbar color="primary" class="nav-bar">
+    <div class="row">
+        <button mat-raised-button (click)="opened = !opened" class="sidenav-button">
+            <mat-icon *ngIf="!opened" color="warn">menu</mat-icon>
+            <mat-icon *ngIf="opened" color="warn">menu_open</mat-icon>
+        </button>
+        <div>
+            <span>Watcher > {{currentRoute}}</span>
+        </div>
+    </div>
+    <div>
+        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/']">Home</a>
+        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Directors</a>
+        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Oscars</a>
+        <a class="nav-link mat-toolbar mat-primary" [routerLink]="['/directors']">Theaters</a>
+    </div>
+</mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav [(opened)]="opened" mode="side">
         <div class="column column-center-vertical">
-            <a class="nav-link mat-body-strong" [routerLink]="['/']">Home</a>
-            <a class="nav-link mat-body-strong" [routerLink]="['/directors']">Directors</a>
+            <span class="add-panel-wrapper">Add Panel Will Be Here</span>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary">
-            <button mat-raised-button (click)="opened = !opened" class="sidenav-button">
-                <mat-icon *ngIf="!opened" color="warn">menu</mat-icon>
-                <mat-icon *ngIf="opened" color="warn">menu_open</mat-icon>
-            </button>
-            <div>
-                <span>Watcher > {{currentRoute}}</span>
-            </div>
-        </mat-toolbar>
+
         <div class="page-content-wrapper">
             <router-outlet></router-outlet>
         </div>
