@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-director',
@@ -7,6 +7,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 })
 export class DirectorComponent implements OnInit, OnChanges {
   showMovies: boolean = false;
+  percentage: number = 0;
 
   @Input() name: string;
   @Input() id: string;
@@ -23,9 +24,17 @@ export class DirectorComponent implements OnInit, OnChanges {
         return a.year - b.year;
       })
     }
+
+    this.calculatePercentage();
   }
 
   onDirector(): void {
     this.showMovies = !this.showMovies;
+  }
+
+  calculatePercentage(): void {
+    const watched = this.movies.filter((elem:any) => elem.watched);
+    const percentageRaw = ((watched.length * 100) / this.movies.length) || 0;
+    this.percentage = Number(Math.round(percentageRaw));
   }
 }
