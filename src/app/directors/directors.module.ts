@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DirectorComponent } from './director/director.component';
 import { MatButtonModule } from "@angular/material/button";
 import { MovieModule } from "../components/movie/movie.module";
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
   declarations: [DirectorsPageComponent, DirectorComponent],
@@ -14,6 +15,7 @@ import { MovieModule } from "../components/movie/movie.module";
     DirectorsRoutingModule,
     MatProgressSpinnerModule,
     MatButtonModule,
+    MatCardModule,
     MovieModule
   ]
 })

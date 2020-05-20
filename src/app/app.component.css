@@ -1,3 +1,16 @@
 .sidenav-container {
     height: 100%;
 }
+
+.nav-link {
+    padding: 0 5px;
+}
+
+.page-content-wrapper {
+    padding: 10px;
+}
+
+.sidenav-button {
+    margin-right: 10px;
+}
+

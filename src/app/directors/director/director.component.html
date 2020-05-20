@@ -1,5 +1,12 @@
-<button mat-raised-button type="button" (click)="onDirector()">{{name}}</button>
-<div *ngIf="showMovies">
+<mat-card>
+    <mat-card-title>{{name}}</mat-card-title>
+    <mat-card-content>I have watched 45% of this director's movies.</mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-button (click)="onDirector()">Movies</button>
+    </mat-card-actions>
+</mat-card>
+
+<div *ngIf="showMovies" class="movies-wrapper">
     <app-movie
             *ngFor="let movie of movies"
             [name]="movie.name">
