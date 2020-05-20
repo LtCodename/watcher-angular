@@ -19,8 +19,9 @@ true}" [routerLink]="['/']">Home</a>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav [(opened)]="opened" mode="side">
-        <div class="column column-center-vertical">
-            <span class="add-panel-wrapper">Add Panel Will Be Here</span>
+        <div class="column column-center-vertical add-panel-content">
+            <span>Add Panel Will Be Here</span>
+            <a [routerLink]="['/admin']">Admin</a>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
