@@ -1,0 +1,7 @@
+<button mat-raised-button type="button" (click)="onDirector()">{{name}}</button>
+<div *ngIf="showMovies">
+    <app-movie
+            *ngFor="let movie of movies"
+            [name]="movie.name">
+    </app-movie>
+</div>

@@ -1,3 +1,11 @@
 <p>Directors</p>
 <mat-spinner *ngIf="showSpinner"></mat-spinner>
-<p *ngIf="directors.length">Directors Node Will Be Here</p>
+
+<div class="row">
+    <app-director
+            *ngFor="let director of directors"
+            [name]="director.name"
+            [id]="director.id"
+            [movies]="director.movies">
+    </app-director>
+</div>
