@@ -9,6 +9,9 @@
 <div *ngIf="showMovies" class="movies-wrapper">
     <app-movie
             *ngFor="let movie of movies"
+            [showBookmarkButton]="true"
+            [showWatchedDirectorButton]="true"
+            [showInfoButton]="true"
             [name]="movie.name">
     </app-movie>
 </div>

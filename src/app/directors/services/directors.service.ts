@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 })
 export class DirectorsService {
 
-    constructor(private firestore: AngularFirestore ) { }
+    constructor(private firestore: AngularFirestore) { }
 
     getDirectors() {
         return this.firestore.collection('directors')

@@ -5,6 +5,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   exports: [
     MovieComponent

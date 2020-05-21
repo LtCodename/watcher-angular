@@ -1,14 +1,37 @@
-<mat-card>
+<mat-card [ngClass]="{'mat-card-filming': mode === 'filmingMode'}">
     <mat-card-title>{{name}}</mat-card-title>
-    <mat-card-content></mat-card-content>
+    <mat-card-content *ngIf="mode === 'filmingMode'">Director: {{directorName}} Year: {{year}}</mat-card-content>
     <mat-card-actions align="end">
-        <button mat-icon-button color="primary">
+        <button
+                *ngIf="showWatchedDirectorButton"
+                mat-icon-button
+                matTooltip="Watched"
+                matTooltipShowDelay="500"
+                color="primary">
             <mat-icon>check_circle</mat-icon>
         </button>
-        <button mat-icon-button color="primary">
+        <button
+                *ngIf="showReleasedButton"
+                mat-icon-button
+                matTooltip="Released"
+                matTooltipShowDelay="500"
+                color="primary">
+            <mat-icon>check_circle</mat-icon>
+        </button>
+        <button
+                *ngIf="showInfoButton"
+                mat-icon-button
+                matTooltip="Information"
+                matTooltipShowDelay="500"
+                color="primary">
             <mat-icon>info</mat-icon>
         </button>
-        <button mat-icon-button color="warn">
+        <button
+                *ngIf="showBookmarkButton"
+                mat-icon-button
+                matTooltip="Bookmark"
+                matTooltipShowDelay="500"
+                color="warn">
             <mat-icon>favorite</mat-icon>
         </button>
     </mat-card-actions>

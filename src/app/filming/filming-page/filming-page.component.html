@@ -1,1 +1,16 @@
-<p>filming-page works!</p>
+<div class="column">
+    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+
+    <div class="row">
+        <app-movie
+                *ngFor="let filmingMovie of filming"
+                [name]="filmingMovie.name"
+                [director]="filmingMovie.director"
+                [directorName]="filmingMovie.directorData.name"
+                [year]="filmingMovie.year"
+                [showReleasedButton]="true"
+                [mode]="'filmingMode'">
+        </app-movie>
+    </div>
+</div>
+
