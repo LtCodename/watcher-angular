@@ -1,11 +1,20 @@
 <mat-card [ngClass]="{'mat-card-filming': mode === 'filmingMode'}">
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-content *ngIf="mode === 'filmingMode'">Director: {{directorName}} Year: {{year}}</mat-card-content>
+    <mat-card-content *ngIf="mode === 'directorsMode' && watched">I've watched this movie.</mat-card-content>
     <mat-card-actions align="end">
         <button
-                *ngIf="showWatchedDirectorButton"
+                *ngIf="showWatchedDirectorButton && !watched"
                 mat-icon-button
-                matTooltip="Watched"
+                matTooltip="Add to 'Watched'"
+                matTooltipShowDelay="500"
+                color="primary">
+            <mat-icon>check_circle_outline</mat-icon>
+        </button>
+        <button
+                *ngIf="showWatchedDirectorButton && watched"
+                mat-icon-button
+                matTooltip="Remove from 'Watched'"
                 matTooltipShowDelay="500"
                 color="primary">
             <mat-icon>check_circle</mat-icon>
@@ -27,9 +36,19 @@
             <mat-icon>info</mat-icon>
         </button>
         <button
-                *ngIf="showBookmarkButton"
+                *ngIf="showBookmarkButton && !bookmarked"
+                (click)="addToFavorites()"
                 mat-icon-button
-                matTooltip="Bookmark"
+                matTooltip="Add to favourites"
+                matTooltipShowDelay="500"
+                color="warn">
+            <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button
+                *ngIf="showBookmarkButton && bookmarked"
+                (click)="addToFavorites()"
+                mat-icon-button
+                matTooltip="Remove from favourites"
                 matTooltipShowDelay="500"
                 color="warn">
             <mat-icon>favorite</mat-icon>

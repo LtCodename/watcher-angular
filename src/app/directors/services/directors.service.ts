@@ -21,6 +21,10 @@ export class DirectorsService {
             .pipe(map(this.processSnapshot));
     }
 
+    toggleBookmarkMovie(id: string, bookmarked: boolean) {
+        return this.firestore.collection('movies').doc(id).update({ bookmarked });
+    }
+
     private processSnapshot(data) {
         return data.map((e) => ({
             id: e.payload.doc.id,

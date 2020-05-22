@@ -12,6 +12,10 @@
             [showBookmarkButton]="true"
             [showWatchedDirectorButton]="true"
             [showInfoButton]="true"
+            [bookmarked]="movie.bookmarked"
+            [mode]="'directorsMode'"
+            (addMovieToFavorites)="addMovieToFavorites(movie.id, !movie.bookmarked)"
+            [watched]="movie.watched"
             [name]="movie.name">
     </app-movie>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-movie',
@@ -9,6 +9,8 @@ export class MovieComponent implements OnInit {
 
   @Input() name: string = '';
   @Input() year: number;
+  @Input() watched: boolean;
+  @Input() bookmarked: boolean = false;
   @Input() director: string = '';
   @Input() directorName: string = '';
   @Input() mode: string = '';
@@ -17,9 +19,14 @@ export class MovieComponent implements OnInit {
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
 
+  @Output() addMovieToFavorites: EventEmitter<void> = new EventEmitter();
+
   constructor() { }
+
+  addToFavorites(): void {
+    this.addMovieToFavorites.emit();
+  }
 
   ngOnInit(): void {
   }
-
 }

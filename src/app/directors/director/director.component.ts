@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IMovie } from '../directors.model';
+import { DirectorsService } from "../services/directors.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-director',
@@ -14,7 +16,7 @@ export class DirectorComponent implements OnInit, OnChanges {
   @Input() id: string;
   @Input() movies: IMovie[] = [];
 
-  constructor() { }
+  constructor(private directorsService: DirectorsService, private serverMessage: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -37,5 +39,19 @@ export class DirectorComponent implements OnInit, OnChanges {
     const watched = this.movies.filter((elem: IMovie) => elem.watched);
     const percentageRaw = ((watched.length * 100) / this.movies.length) || 0;
     this.percentage = Number(Math.round(percentageRaw));
+  }
+
+  addMovieToFavorites(id: string, bookmarked: boolean):void {
+    this.directorsService.toggleBookmarkMovie(id, bookmarked).then(r => {
+      this.serverMessage.open('Updated successfully!', 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: "right"
+      });
+    }).catch(data => {
+      this.serverMessage.open('Error!', 'Dismiss', {
+        duration: 3000,
+        horizontalPosition: "right"
+      });
+    })
   }
 }
