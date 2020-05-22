@@ -8,6 +8,7 @@
                 mat-icon-button
                 matTooltip="Add to 'Watched'"
                 matTooltipShowDelay="500"
+                (click)="toggleWatched()"
                 color="primary">
             <mat-icon>check_circle_outline</mat-icon>
         </button>
@@ -16,6 +17,7 @@
                 mat-icon-button
                 matTooltip="Remove from 'Watched'"
                 matTooltipShowDelay="500"
+                (click)="toggleWatched()"
                 color="primary">
             <mat-icon>check_circle</mat-icon>
         </button>
@@ -32,12 +34,13 @@
                 mat-icon-button
                 matTooltip="Information"
                 matTooltipShowDelay="500"
+                (click)="getMovieData()"
                 color="primary">
             <mat-icon>info</mat-icon>
         </button>
         <button
                 *ngIf="showBookmarkButton && !bookmarked"
-                (click)="addToFavorites()"
+                (click)="toggleFavorites()"
                 mat-icon-button
                 matTooltip="Add to favourites"
                 matTooltipShowDelay="500"
@@ -46,7 +49,7 @@
         </button>
         <button
                 *ngIf="showBookmarkButton && bookmarked"
-                (click)="addToFavorites()"
+                (click)="toggleFavorites()"
                 mat-icon-button
                 matTooltip="Remove from favourites"
                 matTooltipShowDelay="500"

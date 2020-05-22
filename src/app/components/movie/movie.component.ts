@@ -19,12 +19,22 @@ export class MovieComponent implements OnInit {
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
 
-  @Output() addMovieToFavorites: EventEmitter<void> = new EventEmitter();
+  @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
+  @Output() toggleWatchedDirectors: EventEmitter<void> = new EventEmitter();
+  @Output() fetchMovieInformation: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
-  addToFavorites(): void {
-    this.addMovieToFavorites.emit();
+  toggleFavorites(): void {
+    this.toggleFavoritesDirectors.emit();
+  }
+
+  toggleWatched(): void {
+    this.toggleWatchedDirectors.emit();
+  }
+
+  getMovieData(): void {
+    this.fetchMovieInformation.emit();
   }
 
   ngOnInit(): void {

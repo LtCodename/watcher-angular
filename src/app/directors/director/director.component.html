@@ -14,7 +14,9 @@
             [showInfoButton]="true"
             [bookmarked]="movie.bookmarked"
             [mode]="'directorsMode'"
-            (addMovieToFavorites)="addMovieToFavorites(movie.id, !movie.bookmarked)"
+            (toggleFavoritesDirectors)="toggleFavoritesDirectors(movie.id, !movie.bookmarked)"
+            (toggleWatchedDirectors)="toggleWatchedDirectors(movie.id, !movie.watched)"
+            (fetchMovieInformation)="fetchMovieInformation(movie.name, movie.year)"
             [watched]="movie.watched"
             [name]="movie.name">
     </app-movie>

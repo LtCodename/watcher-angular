@@ -41,17 +41,36 @@ export class DirectorComponent implements OnInit, OnChanges {
     this.percentage = Number(Math.round(percentageRaw));
   }
 
-  addMovieToFavorites(id: string, bookmarked: boolean):void {
+  toggleFavoritesDirectors(id: string, bookmarked: boolean):void {
     this.directorsService.toggleBookmarkMovie(id, bookmarked).then(r => {
-      this.serverMessage.open('Updated successfully!', 'Dismiss', {
-        duration: 3000,
-        horizontalPosition: "right"
-      });
+      this.showServerMessage();
     }).catch(data => {
-      this.serverMessage.open('Error!', 'Dismiss', {
-        duration: 3000,
-        horizontalPosition: "right"
-      });
+      this.showServerMessage(true);
     })
+  }
+
+  toggleWatchedDirectors(id: string, watched: boolean):void {
+    this.directorsService.toggleMovieWatchedStatus(id, watched).then(r => {
+      this.showServerMessage();
+    }).catch(data => {
+      this.showServerMessage(true);
+    })
+  }
+
+  fetchMovieInformation(name: string, year: number):void {
+    this.directorsService.getMovieDataFromIMDBApi(name, year).then(movieData => {
+      console.log(movieData);
+    }).catch(data => {
+    })
+  }
+
+  showServerMessage(error: boolean = false): void {
+    let message: string = "Updated successfully!";
+    if (error) message = "Error!";
+
+    this.serverMessage.open(message, 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "right"
+    });
   }
 }

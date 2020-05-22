@@ -12,3 +12,11 @@ export interface IMovie {
     watched: boolean
     year: number;
 }
+
+export interface IMovieApiData {
+    year?: string;
+    awards?: string;
+    director?: string;
+    metascore?: string;
+    imdbRating?: string;
+}
