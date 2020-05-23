@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DirectorsService } from "../../directors/services/directors.service";
 
 @Component({
   selector: 'app-movie',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
+
+  movieDetails: object = null;
 
   @Input() name: string = '';
   @Input() year: number;
@@ -21,9 +24,8 @@ export class MovieComponent implements OnInit {
 
   @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedDirectors: EventEmitter<void> = new EventEmitter();
-  @Output() fetchMovieInformation: EventEmitter<void> = new EventEmitter();
 
-  constructor() { }
+  constructor(private directorsService: DirectorsService) { }
 
   toggleFavorites(): void {
     this.toggleFavoritesDirectors.emit();
@@ -34,7 +36,14 @@ export class MovieComponent implements OnInit {
   }
 
   getMovieData(): void {
-    this.fetchMovieInformation.emit();
+    if (this.movieDetails) {
+      this.movieDetails = null;
+      return;
+    }
+
+    this.directorsService.getMovieDataFromIMDBApi(this.name, this.year).subscribe(response => {
+      this.movieDetails = response;
+    })
   }
 
   ngOnInit(): void {

@@ -57,13 +57,6 @@ export class DirectorComponent implements OnInit, OnChanges {
     })
   }
 
-  fetchMovieInformation(name: string, year: number):void {
-    this.directorsService.getMovieDataFromIMDBApi(name, year).then(movieData => {
-      console.log(movieData);
-    }).catch(data => {
-    })
-  }
-
   showServerMessage(error: boolean = false): void {
     let message: string = "Updated successfully!";
     if (error) message = "Error!";

@@ -9,14 +9,7 @@ export interface IMovie {
     director: string;
     id: string;
     name: string;
-    watched: boolean
+    watched: boolean;
     year: number;
-}
-
-export interface IMovieApiData {
-    year?: string;
-    awards?: string;
-    director?: string;
-    metascore?: string;
-    imdbRating?: string;
+    dataFromApi?: object;
 }

@@ -8,15 +8,15 @@
 
 <div *ngIf="showMovies" class="movies-wrapper">
     <app-movie
-            *ngFor="let movie of movies"
+            *ngFor="let movie of movies; let i = index"
             [showBookmarkButton]="true"
             [showWatchedDirectorButton]="true"
             [showInfoButton]="true"
             [bookmarked]="movie.bookmarked"
+            [year]="movie.year"
             [mode]="'directorsMode'"
             (toggleFavoritesDirectors)="toggleFavoritesDirectors(movie.id, !movie.bookmarked)"
             (toggleWatchedDirectors)="toggleWatchedDirectors(movie.id, !movie.watched)"
-            (fetchMovieInformation)="fetchMovieInformation(movie.name, movie.year)"
             [watched]="movie.watched"
             [name]="movie.name">
     </app-movie>

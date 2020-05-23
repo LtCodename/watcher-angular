@@ -2,7 +2,14 @@
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-content *ngIf="mode === 'filmingMode'">Director: {{directorName}} Year: {{year}}</mat-card-content>
     <mat-card-content *ngIf="mode === 'directorsMode' && watched">I've watched this movie.</mat-card-content>
+    <div *ngIf="mode === 'directorsMode' && movieDetails">
+        <p><span class="mat-body-strong mat-body-2">Year:</span> {{year}}</p>
+        <p><span class="mat-body-strong mat-body-2">Awards:</span> {{movieDetails["Awards"]}}</p>
+        <p><span class="mat-body-strong mat-body-2">Metascore:</span> {{movieDetails["Metascore"]}}</p>
+        <p><span class="mat-body-strong mat-body-2">IMDB Rating:</span> {{movieDetails["imdbRating"]}}</p>
+    </div>
     <mat-card-actions align="end">
+        <!--/directors buttons-->
         <button
                 *ngIf="showWatchedDirectorButton && !watched"
                 mat-icon-button
@@ -21,23 +28,7 @@
                 color="primary">
             <mat-icon>check_circle</mat-icon>
         </button>
-        <button
-                *ngIf="showReleasedButton"
-                mat-icon-button
-                matTooltip="Released"
-                matTooltipShowDelay="500"
-                color="primary">
-            <mat-icon>check_circle</mat-icon>
-        </button>
-        <button
-                *ngIf="showInfoButton"
-                mat-icon-button
-                matTooltip="Information"
-                matTooltipShowDelay="500"
-                (click)="getMovieData()"
-                color="primary">
-            <mat-icon>info</mat-icon>
-        </button>
+
         <button
                 *ngIf="showBookmarkButton && !bookmarked"
                 (click)="toggleFavorites()"
@@ -55,6 +46,25 @@
                 matTooltipShowDelay="500"
                 color="warn">
             <mat-icon>favorite</mat-icon>
+        </button>
+        <!--/filming buttons-->
+        <button
+                *ngIf="showReleasedButton"
+                mat-icon-button
+                matTooltip="Mark as 'Released'"
+                matTooltipShowDelay="500"
+                color="primary">
+            <mat-icon>check_circle_outline</mat-icon>
+        </button>
+        <!--General buttons-->
+        <button
+                *ngIf="showInfoButton"
+                mat-icon-button
+                matTooltip="Information"
+                matTooltipShowDelay="500"
+                (click)="getMovieData()"
+                color="primary">
+            <mat-icon>info</mat-icon>
         </button>
     </mat-card-actions>
 </mat-card>

@@ -11,6 +11,7 @@ import { environment } from "../environments/environment";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     MatToolbarModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

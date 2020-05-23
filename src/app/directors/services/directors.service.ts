@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
-import { IMovieApiData } from "../directors.model";
-import axios from "axios";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +9,7 @@ import axios from "axios";
 export class DirectorsService {
     OMDbApiKey: string = '36827e98';
 
-    constructor(private firestore: AngularFirestore) { }
+    constructor(private firestore: AngularFirestore, private  http: HttpClient ) { }
 
     getDirectors() {
         return this.firestore.collection('directors')
@@ -32,22 +31,8 @@ export class DirectorsService {
         return this.firestore.collection('movies').doc(id).update({ watched });
     }
 
-    async getMovieDataFromIMDBApi(name: string, year: number) {
-        let fromServer:IMovieApiData = {};
-        try {
-            const { data } = await axios.get(
-                `//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${this.OMDbApiKey}`, {
-                });
-            fromServer = {
-                year: data['Year'],
-                awards: data['Awards'],
-                metascore: data['Metascore'],
-                imdbRating: data['imdbRating']
-            };
-        } catch (e) {
-            throw new Error('Something went wrong!');
-        }
-        return fromServer;
+    getMovieDataFromIMDBApi(name: string, year: number) {
+        return this.http.get(`//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${this.OMDbApiKey}`);
     }
 
     private processSnapshot(data) {
