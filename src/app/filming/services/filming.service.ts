@@ -23,10 +23,20 @@ export class FilmingService {
   }
 
   private processSnapshot(data) {
-    return data.map((e) => ({
+    let finalResults = data.map((e) => ({
       id: e.payload.doc.id,
       // @ts-ignore
       ...e.payload.doc.data()
-    }));
+    })).sort((a:any, b: any) => {
+      if (a.year < b.year) {
+        return -1;
+      }
+      if (a.year > b.year) {
+        return 1;
+      }
+      return 0;
+    })
+
+    return finalResults;
   }
 }

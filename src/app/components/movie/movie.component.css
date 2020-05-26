@@ -10,3 +10,7 @@ mat-card-title {
 .mat-card-filming {
     margin-right: 10px;
 }
+
+.movie-card-watched {
+    border-top: 5px solid green;
+}

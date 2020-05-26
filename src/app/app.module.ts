@@ -12,10 +12,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { HttpClientModule } from "@angular/common/http";
+import { MovieDataWindowComponent } from './components/movie-data-window/movie-data-window.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MovieDataWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,8 @@ import { HttpClientModule } from "@angular/common/http";
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MatToolbarModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

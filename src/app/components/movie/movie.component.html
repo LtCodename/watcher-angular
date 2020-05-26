@@ -1,13 +1,8 @@
-<mat-card [ngClass]="{'mat-card-filming': mode === 'filmingMode'}">
+<mat-card [ngClass]="{'mat-card-filming': mode === 'filmingMode', 'movie-card-watched': watched}">
     <mat-card-title>{{name}}</mat-card-title>
-    <mat-card-content *ngIf="mode === 'filmingMode'">Director: {{directorName}} Year: {{year}}</mat-card-content>
-    <mat-card-content *ngIf="mode === 'directorsMode' && watched">I've watched this movie.</mat-card-content>
-    <div *ngIf="mode === 'directorsMode' && movieDetails">
-        <p><span class="mat-body-strong mat-body-2">Year:</span> {{year}}</p>
-        <p><span class="mat-body-strong mat-body-2">Awards:</span> {{movieDetails["Awards"]}}</p>
-        <p><span class="mat-body-strong mat-body-2">Metascore:</span> {{movieDetails["Metascore"]}}</p>
-        <p><span class="mat-body-strong mat-body-2">IMDB Rating:</span> {{movieDetails["imdbRating"]}}</p>
-    </div>
+    <mat-card-content *ngIf="mode === 'filmingMode'">
+        Director is <span class="mat-body-strong">{{directorName}}</span> and an estimated release year is <span class="mat-body-strong">{{year}}</span>.
+    </mat-card-content>
     <mat-card-actions align="end">
         <!--/directors buttons-->
         <button
@@ -28,21 +23,20 @@
                 color="primary">
             <mat-icon>check_circle</mat-icon>
         </button>
-
         <button
-                *ngIf="showBookmarkButton && !bookmarked"
+                *ngIf="showBookmarkButton && !bookmarked && !watched"
                 (click)="toggleFavorites()"
                 mat-icon-button
-                matTooltip="Add to favourites"
+                matTooltip="Add to watchlist"
                 matTooltipShowDelay="500"
                 color="warn">
             <mat-icon>favorite_border</mat-icon>
         </button>
         <button
-                *ngIf="showBookmarkButton && bookmarked"
+                *ngIf="showBookmarkButton && bookmarked && !watched"
                 (click)="toggleFavorites()"
                 mat-icon-button
-                matTooltip="Remove from favourites"
+                matTooltip="Remove from watchlist"
                 matTooltipShowDelay="500"
                 color="warn">
             <mat-icon>favorite</mat-icon>
@@ -53,8 +47,18 @@
                 mat-icon-button
                 matTooltip="Mark as 'Released'"
                 matTooltipShowDelay="500"
+                (click)="markAsReleased()"
                 color="primary">
-            <mat-icon>check_circle_outline</mat-icon>
+            <mat-icon>check_circle</mat-icon>
+        </button>
+        <button
+                *ngIf="showReleasedButton"
+                mat-icon-button
+                matTooltip="Edit release year"
+                matTooltipShowDelay="500"
+                (click)="markAsReleased()"
+                color="primary">
+            <mat-icon>create</mat-icon>
         </button>
         <!--General buttons-->
         <button
