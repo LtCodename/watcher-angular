@@ -1,1 +1,12 @@
-<p>oscars-page works!</p>
+<div class="column">
+    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+
+    <div class="row">
+        <app-year
+                *ngFor="let year of years"
+                [name]="year.name"
+                [id]="year.id"
+                [movies]="year.movies">
+        </app-year>
+    </div>
+</div>
