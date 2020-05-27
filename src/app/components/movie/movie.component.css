@@ -1,13 +1,13 @@
-mat-card {
+.mat-card-directors {
+    width: 278px;
+}
+
+.mat-card-filming {
     width: 278px;
 }
 
 :host:not(:last-child) mat-card {
     margin-bottom: 10px;
-}
-
-mat-card-title {
-    line-height: initial;
 }
 
 .mat-card-filming {

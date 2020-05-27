@@ -30,3 +30,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .column-center-vertical {
     justify-content: center;
 }
+
+.movies-wrapper {
+    margin-top: 10px;
+}
+
+mat-card-title {
+    line-height: initial;
+}

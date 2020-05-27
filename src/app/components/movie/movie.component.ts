@@ -23,6 +23,7 @@ export class MovieComponent implements OnInit {
   @Input() directorName: string = '';
   @Input() mode: string = '';
   @Input() showWatchedDirectorButton: boolean = false;
+  @Input() showWatchedOscarsButton: boolean = false;
   @Input() showInfoButton: boolean = false;
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
@@ -43,6 +44,15 @@ export class MovieComponent implements OnInit {
 
   toggleWatched(): void {
     this.toggleWatchedDirectors.emit();
+  }
+
+  toggleWatchedOscars(): void {
+    this.directorsService.toggleWatchedOscars(this.id, !this.watched).then(response => {
+      this.showMessage('Updated successfully!');
+    }).catch(data => {
+      this.showMessage('Error!');
+      this.yearChangeDialog.close();
+    })
   }
 
   markAsReleased(): void {

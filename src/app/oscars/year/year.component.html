@@ -1,8 +1,20 @@
 <mat-card>
-    <mat-card-title>{{name}}</mat-card-title>
-    <mat-card-content>I have watched <span class="mat-body-strong">{{percentage}}%</span> of this years's movies.</mat-card-content>
-    <mat-card-content>Best picture is <span class="mat-body-strong">{{bestPictureName}}</span>.</mat-card-content>
+    <mat-card-title>{{name}} > {{bestPictureName}}</mat-card-title>
+    <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
     <mat-card-actions align="end">
         <button mat-button (click)="showMovies()">Movies</button>
     </mat-card-actions>
 </mat-card>
+
+
+<div *ngIf="showYearsMovies" class="movies-wrapper">
+    <app-movie
+        *ngFor="let movie of movies; let i = index"
+        [mode]="'oscarsMode'"
+        [showInfoButton]="true"
+        [showWatchedOscarsButton]="true"
+        [watched]="movie.watched"
+        [id]="movie.id"
+        [name]="movie.name">
+    </app-movie>
+</div>

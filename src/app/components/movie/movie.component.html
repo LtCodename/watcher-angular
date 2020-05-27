@@ -1,4 +1,9 @@
-<mat-card [ngClass]="{'mat-card-filming': mode === 'filmingMode', 'movie-card-watched': watched}">
+<mat-card [ngClass]="{
+    'mat-card-filming': mode === 'filmingMode', 
+    'mat-card-directors': mode === 'directorsMode', 
+    'mat-card-oscars': mode === 'oscarsMode', 
+    'movie-card-watched': watched
+}">
     <mat-card-title>{{name}}</mat-card-title>
     <mat-card-content *ngIf="mode === 'filmingMode'">
         Director is <span class="mat-body-strong">{{directorName}}</span> and an estimated release year is <span class="mat-body-strong">{{year}}</span>.
@@ -59,6 +64,25 @@
                 (click)="showEditYearWindow()"
                 color="primary">
             <mat-icon>create</mat-icon>
+        </button>
+        <!--/filming buttons-->
+        <button
+                *ngIf="showWatchedOscarsButton && !watched"
+                mat-icon-button
+                matTooltip="Add to 'Watched'"
+                matTooltipShowDelay="500"
+                (click)="toggleWatchedOscars()"
+                color="primary">
+            <mat-icon>check_circle_outline</mat-icon>
+        </button>
+        <button
+                *ngIf="showWatchedOscarsButton && watched"
+                mat-icon-button
+                matTooltip="Remove from 'Watched'"
+                matTooltipShowDelay="500"
+                (click)="toggleWatchedOscars()"
+                color="primary">
+            <mat-icon>check_circle</mat-icon>
         </button>
         <!--General buttons-->
         <button

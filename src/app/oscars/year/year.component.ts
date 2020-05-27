@@ -12,6 +12,7 @@ export class YearComponent implements OnInit, OnChanges {
   @Input() movies: any;
   percentage: number = 0;
   bestPictureName: string = "";
+  showYearsMovies: boolean = false;
 
   constructor() { }
 
@@ -32,6 +33,7 @@ export class YearComponent implements OnInit, OnChanges {
   }
 
   showMovies(): void {
+    this.showYearsMovies = !this.showYearsMovies;
   }
 
   ngOnInit(): void {
