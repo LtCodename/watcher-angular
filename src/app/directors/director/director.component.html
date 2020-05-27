@@ -18,7 +18,6 @@
         [mode]="'directorsMode'"
         (toggleFavoritesDirectors)="toggleFavoritesDirectors(movie.id, !movie.bookmarked)"
         (toggleWatchedDirectors)="toggleWatchedDirectors(movie.id, !movie.watched)"
-        (toggleMovieReleased)="toggleMovieReleased(movie.name, movie.year, movie.director, movie.id)"
         [watched]="movie.watched"
         [name]="movie.name">
     </app-movie>

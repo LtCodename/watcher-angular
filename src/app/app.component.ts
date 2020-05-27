@@ -13,7 +13,6 @@ export class AppComponent implements OnInit{
   constructor(private router: Router) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        let currentPage: string;
         switch(this.router.url) {
           case "/":
             this.currentRoute = '> Home';

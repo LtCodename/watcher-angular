@@ -57,14 +57,6 @@ export class DirectorComponent implements OnInit, OnChanges {
     })
   }
 
-  toggleMovieReleased(name: string, year: number, director: string, id: string):void {
-    console.log('hello 2');
-    /*this.directorsService.releaseMovie(name, year, director, id).subscribe((data) => {
-      console.log(data);
-      console.log('...done?');
-    })*/
-  }
-
   showServerMessage(error: boolean = false): void {
     let message: string = "Updated successfully!";
     if (error) message = "Error!";

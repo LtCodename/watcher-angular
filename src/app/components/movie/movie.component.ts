@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
-import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 
 @Component({
   selector: 'app-movie',
@@ -30,7 +29,6 @@ export class MovieComponent implements OnInit {
 
   @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedDirectors: EventEmitter<void> = new EventEmitter();
-  @Output() toggleMovieReleased: EventEmitter<void> = new EventEmitter();
 
   constructor(
       private directorsService: DirectorsService,
@@ -48,8 +46,9 @@ export class MovieComponent implements OnInit {
   }
 
   markAsReleased(): void {
-    console.log('hello 1');
-    this.toggleMovieReleased.emit();
+    this.directorsService.releaseMovie(this.name, this.year, this.director, this.id).subscribe((data) => {
+      this.showMessage('Updated successfully!');
+    })
   }
 
   changeYearCallback(newYear: number): void {

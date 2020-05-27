@@ -37,7 +37,6 @@ export class DirectorsService {
     }
 
     releaseMovie(name: string, year: number, director: string, idToRemove: string ) {
-
         let addToDirectors = this.firestore.collection('movies').add({
             name,
             year,
