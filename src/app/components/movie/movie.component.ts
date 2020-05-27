@@ -3,6 +3,8 @@ import { DirectorsService } from "../../directors/services/directors.service";
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
+import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 
 @Component({
   selector: 'app-movie',
@@ -11,9 +13,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class MovieComponent implements OnInit {
 
+  yearChangeDialog: any;
+
   @Input() name: string = '';
   @Input() year: number;
   @Input() watched: boolean;
+  @Input() id: string;
   @Input() bookmarked: boolean = false;
   @Input() director: string = '';
   @Input() directorName: string = '';
@@ -30,7 +35,7 @@ export class MovieComponent implements OnInit {
   constructor(
       private directorsService: DirectorsService,
       public dialog: MatDialog,
-      private serverMessage: MatSnackBar
+      private serverMessage: MatSnackBar,
   ) { }
 
 
@@ -47,20 +52,41 @@ export class MovieComponent implements OnInit {
     this.toggleMovieReleased.emit();
   }
 
+  changeYearCallback(newYear: number): void {
+    this.directorsService.updateYearInFilming(this.id, newYear).then(response => {
+      this.yearChangeDialog.close();
+      this.showMessage('Release year was updated!');
+    }).catch(data => {
+      this.showMessage('Error!');
+      this.yearChangeDialog.close();
+    })
+  }
+
+  showEditYearWindow(): void {
+    this.yearChangeDialog = this.dialog.open(ChangeYearWindowComponent, {data: {
+      changeYearCallback: (year: number) => this.changeYearCallback(year),
+      oldYear: this.year
+    }});
+  }
+
   getMovieData(): void {
     this.directorsService.getMovieDataFromIMDBApi(this.name, this.year).subscribe(response => {
       if (response['Error']) {
-        this.serverMessage.open('Movie not found, update release year!', 'Dismiss', {
-          duration: 3000,
-          horizontalPosition: "right"
-        });
+        this.showMessage('Movie not found, update release year!');
         return;
       }
 
       this.dialog.open(MovieDataWindowComponent, {data: {
-          movie: response
-        }});
+        movie: response
+      }});
     })
+  }
+
+  showMessage(msg: string): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "right"
+    });
   }
 
   ngOnInit(): void {

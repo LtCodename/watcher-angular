@@ -28,6 +28,10 @@ export class DirectorsService {
         return this.firestore.collection('movies').doc(id).update({ bookmarked });
     }
 
+    updateYearInFilming(id: string, year: number) {
+        return this.firestore.collection('filming').doc(id).update({ year });
+    }
+
     toggleMovieWatchedStatus(id: string, watched: boolean) {
         return this.firestore.collection('movies').doc(id).update({ watched });
     }

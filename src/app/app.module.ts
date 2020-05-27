@@ -15,11 +15,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { MovieDataWindowComponent } from './components/movie-data-window/movie-data-window.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ChangeYearWindowComponent } from './components/change-year-window/change-year-window.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieDataWindowComponent
+    MovieDataWindowComponent,
+    ChangeYearWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    FormsModule,
+    MatInputModule,
     MatSnackBarModule,
     MatToolbarModule,
     BrowserAnimationsModule,
