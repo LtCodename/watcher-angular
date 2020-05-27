@@ -1,6 +1,9 @@
 mat-card {
-    margin-bottom: 10px;
     width: 278px;
+}
+
+:host:not(:last-child) mat-card {
+    margin-bottom: 10px;
 }
 
 mat-card-title {

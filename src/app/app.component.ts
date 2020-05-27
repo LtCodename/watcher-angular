@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,15 +8,36 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class AppComponent implements OnInit{
   opened: boolean = false;
-  currentRoute: string = 'Directors';
+  currentRoute: string;
 
   constructor(private router: Router) {
-
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        let currentPage: string;
+        switch(this.router.url) {
+          case "/":
+            this.currentRoute = '> Home';
+          break;
+          case "/directors":
+            this.currentRoute = '> Directors';
+          break;
+          case "/filming":
+            this.currentRoute = '> Filming';
+          break;
+          case "/oscars":
+            this.currentRoute = '> Oscars';
+          break;
+          case "/theaters":
+            this.currentRoute = '> Theaters';
+          break;
+            default:
+              this.currentRoute = '> Home';
+        }
+      }
+    });
   }
 
   ngOnInit() {
-    console.log(window.location.pathname);
-    console.log(this.router.url);
   }
 
 }
