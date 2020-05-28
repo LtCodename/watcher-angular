@@ -18,6 +18,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from './components/change-year-window/change-year-window.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
+import { AddPanelModule } from './components/add-panel/add-panel.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatInputModule } from "@angular/material/input";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
+    AddPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

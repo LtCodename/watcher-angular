@@ -35,6 +35,10 @@ export class DirectorComponent implements OnInit, OnChanges {
     this.showMovies = !this.showMovies;
   }
 
+  confirmRemove(): void {
+    console.log('show confirm remove window');
+  }
+
   calculatePercentage(): void {
     const watched = this.movies.filter((elem: IMovie) => elem.watched);
     const percentageRaw = ((watched.length * 100) / this.movies.length) || 0;

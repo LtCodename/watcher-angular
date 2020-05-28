@@ -5,12 +5,10 @@
             <mat-icon *ngIf="opened" color="warn">menu_open</mat-icon>
         </button>
         <div>
-            <span>Watcher {{currentRoute}}</span>
+            <span>Watcher > {{currentRoute}}</span>
         </div>
     </div>
     <div>
-        <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
-true}" [routerLink]="['/']">Home</a>
         <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/directors']">Directors</a>
         <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/filming']">Filming</a>
         <a class="nav-link mat-toolbar mat-primary" routerLinkActive="active-link" [routerLink]="['/oscars']">Oscars</a>
@@ -20,12 +18,11 @@ true}" [routerLink]="['/']">Home</a>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav [(opened)]="opened" mode="side">
         <div class="column column-center-vertical add-panel-content">
-            <span>Add Panel Will Be Here</span>
-            <a [routerLink]="['/admin']">Admin</a>
+            <app-add-directors *ngIf="currentRoute === 'Directors'"></app-add-directors>
+            <!-- <a [routerLink]="['/admin']">Admin</a> -->
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
-
         <div class="page-content-wrapper">
             <router-outlet></router-outlet>
         </div>

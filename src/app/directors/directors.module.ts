@@ -9,6 +9,8 @@ import { MovieModule } from "../components/movie/movie.module";
 import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [DirectorsPageComponent, DirectorComponent],
@@ -20,7 +22,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatCardModule,
     MatSnackBarModule,
     MovieModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class DirectorsModule { }

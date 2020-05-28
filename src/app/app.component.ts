@@ -14,20 +14,17 @@ export class AppComponent implements OnInit{
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         switch(this.router.url) {
-          case "/":
-            this.currentRoute = '> Home';
-          break;
           case "/directors":
-            this.currentRoute = '> Directors';
+            this.currentRoute = 'Directors';
           break;
           case "/filming":
-            this.currentRoute = '> Filming';
+            this.currentRoute = 'Filming';
           break;
           case "/oscars":
-            this.currentRoute = '> Oscars';
+            this.currentRoute = 'Oscars';
           break;
           case "/theaters":
-            this.currentRoute = '> Theaters';
+            this.currentRoute = 'Theaters';
           break;
             default:
               this.currentRoute = '> Home';

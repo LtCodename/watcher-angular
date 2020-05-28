@@ -1,0 +1,31 @@
+<mat-accordion>
+    <!-- Add Director -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Director
+        </mat-panel-title>
+        <mat-panel-description>
+          Add Director
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="column">
+        <mat-form-field floatLabel="auto">
+            <mat-label>Director's name</mat-label>
+            <input matInput required [(ngModel)]="directorName"/>
+        </mat-form-field>
+        <button mat-button (click)="addNewDirector()">Add</button>
+    </div>
+    </mat-expansion-panel>
+    <!-- Add Movie -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Movie
+          </mat-panel-title>
+          <mat-panel-description>
+            Add Movie
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+  </mat-accordion>
