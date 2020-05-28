@@ -19,12 +19,14 @@ import { ChangeYearWindowComponent } from './components/change-year-window/chang
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { AddPanelModule } from './components/add-panel/add-panel.module';
+import { ConfirmWindowComponent } from './components/confirm-window/confirm-window.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDataWindowComponent,
-    ChangeYearWindowComponent
+    ChangeYearWindowComponent,
+    ConfirmWindowComponent
   ],
   imports: [
     BrowserModule,

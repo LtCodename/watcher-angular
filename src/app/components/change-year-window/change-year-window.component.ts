@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";

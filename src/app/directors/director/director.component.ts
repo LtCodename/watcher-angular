@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { IMovie } from '../directors.model';
 import { DirectorsService } from "../services/directors.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 
 @Component({
   selector: 'app-director',
@@ -11,12 +13,17 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class DirectorComponent implements OnInit, OnChanges {
   showMovies: boolean = false;
   percentage: number = 0;
+  confirmWindow: any;
 
   @Input() name: string;
   @Input() id: string;
   @Input() movies: IMovie[] = [];
 
-  constructor(private directorsService: DirectorsService, private serverMessage: MatSnackBar) { }
+  constructor(
+    private directorsService: DirectorsService, 
+    private serverMessage: MatSnackBar,
+    private dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
   }
@@ -36,7 +43,19 @@ export class DirectorComponent implements OnInit, OnChanges {
   }
 
   confirmRemove(): void {
-    console.log('show confirm remove window');
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeDirector(this.id)
+    }});
+  }
+
+  removeDirector(id: string):void {
+    console.log(`removing director ${id}`);
+    this.directorsService.deleteDirector(id).then(r => {
+      this.confirmWindow .close();
+      this.showServerMessage();
+    }).catch(data => {
+      this.showServerMessage(true);
+    })
   }
 
   calculatePercentage(): void {

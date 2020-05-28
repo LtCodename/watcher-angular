@@ -28,6 +28,10 @@ export class DirectorsService {
         return this.firestore.collection('movies').doc(id).update({ bookmarked });
     }
 
+    deleteDirector(id: string) {
+        return this.firestore.collection('directors').doc(id).delete();
+    }
+    
     updateYearInFilming(id: string, year: number) {
         return this.firestore.collection('filming').doc(id).update({ year });
     }

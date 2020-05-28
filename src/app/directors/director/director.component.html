@@ -2,7 +2,6 @@
     <mat-card-title>{{name}}</mat-card-title>
     <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
     <mat-card-actions align="end">
-        <button mat-raised-button (click)="onDirector()">Movies</button>
         <button
                 mat-icon-button
                 matTooltip="Remove director"
@@ -11,6 +10,7 @@
                 color="primary">
             <mat-icon>delete</mat-icon>
         </button>
+        <button mat-raised-button (click)="onDirector()">Movies</button>
     </mat-card-actions>
 </mat-card>
 
