@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
+import { ConfirmWindowComponent } from '../confirm-window/confirm-window.component';
 
 @Component({
   selector: 'app-movie',
@@ -13,6 +14,7 @@ import { ChangeYearWindowComponent } from '../change-year-window/change-year-win
 export class MovieComponent implements OnInit {
 
   yearChangeDialog: any;
+  confirmWindow: any;
 
   @Input() name: string = '';
   @Input() year: number;
@@ -55,8 +57,15 @@ export class MovieComponent implements OnInit {
     })
   }
 
+  cofirmMovieRelease(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.markAsReleased()
+    }});
+  }
+
   markAsReleased(): void {
     this.directorsService.releaseMovie(this.name, this.year, this.director, this.id).subscribe((data) => {
+      this.confirmWindow.close();
       this.showMessage('Updated successfully!');
     })
   }
