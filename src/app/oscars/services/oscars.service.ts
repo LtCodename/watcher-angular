@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OscarsService {
 
-  constructor(private firestore: AngularFirestore) { }
+  oscarYears$: Observable<any>;
+  oscarMovies$: Observable<any>;
+
+  private oscarYearsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
+  private oscarMoviesSubject: BehaviorSubject<any> = new BehaviorSubject([]);
+
+  constructor(private firestore: AngularFirestore) {
+      this.oscarYears$ = this.oscarYearsSubject.asObservable();
+      this.oscarMovies$ = this.oscarMoviesSubject.asObservable();
+
+      this.getYears().subscribe(data => {
+        this.oscarYearsSubject.next(data);
+    });
+
+    this.getMovies().subscribe(data => {
+        this.oscarMoviesSubject.next(data);
+    });
+   }
 
   getYears() {
     return this.firestore.collection('oscarYears')

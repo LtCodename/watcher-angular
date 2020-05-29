@@ -16,7 +16,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   showSpinner = true;
 
   constructor(private filmingService: FilmingService, private directorsService: DirectorsService ) {
-    this.filmingService.getFilming()
+    this.filmingService.filming$
         .pipe(
             takeUntil(this.notifier),
             mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData) => [filmingData, directorData])))

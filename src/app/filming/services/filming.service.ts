@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmingService {
 
+  filming$: Observable<any>;
 
-  constructor(private firestore: AngularFirestore) { }
+  private filmingSubject: BehaviorSubject<any> = new BehaviorSubject([]);
+
+  constructor(private firestore: AngularFirestore) {
+    this.filming$ = this.filmingSubject.asObservable();
+
+    this.getFilming().subscribe(data => {
+      this.filmingSubject.next(data);
+  });
+   }
 
   getFilming() {
     return this.firestore.collection('filming')

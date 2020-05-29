@@ -16,10 +16,10 @@ export class OscarsPageComponent implements OnInit, OnChanges {
   showSpinner = true;
 
   constructor(private oscarsService: OscarsService) {
-    this.oscarsService.getYears()
+    this.oscarsService.oscarYears$
       .pipe(
         takeUntil(this.notifier),
-        mergeMap((yearsData) => this.oscarsService.getMovies().pipe(map((movieData) => [yearsData, movieData])))
+        mergeMap((yearsData) => this.oscarsService.oscarMovies$.pipe(map((movieData) => [yearsData, movieData])))
       )
       .subscribe(([yearsData, movieData]) => {
         yearsData.forEach((year: IOscarYear) => {
