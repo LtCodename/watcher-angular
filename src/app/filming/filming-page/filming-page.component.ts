@@ -3,6 +3,7 @@ import { FilmingService } from "../services/filming.service";
 import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
 import { IFilmingMovie } from "../filming.model";
+import { DirectorsService } from 'src/app/directors/services/directors.service';
 
 @Component({
   selector: 'app-filming-page',
@@ -14,11 +15,11 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   filming: IFilmingMovie[] = [];
   showSpinner = true;
 
-  constructor(private filmingService: FilmingService ) {
+  constructor(private filmingService: FilmingService, private directorsService: DirectorsService ) {
     this.filmingService.getFilming()
         .pipe(
             takeUntil(this.notifier),
-            mergeMap((filmingData) => this.filmingService.getDirectors().pipe(map((directorData) => [filmingData, directorData])))
+            mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData) => [filmingData, directorData])))
         )
         .subscribe(([filmingData, directorData]) => {
           filmingData.forEach((filmingMovie: IFilmingMovie) => {

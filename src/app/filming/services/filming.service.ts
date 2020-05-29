@@ -16,12 +16,6 @@ export class FilmingService {
         .pipe(map(this.processSnapshot));
   }
 
-  getDirectors() {
-    return this.firestore.collection('directors')
-        .snapshotChanges()
-        .pipe(map(this.processSnapshot));
-  }
-
   private processSnapshot(data) {
     let finalResults = data.map((e) => ({
       id: e.payload.doc.id,

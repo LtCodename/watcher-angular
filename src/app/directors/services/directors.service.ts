@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
-import { forkJoin } from 'rxjs';
+import { forkJoin, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,18 +10,23 @@ import { forkJoin } from 'rxjs';
 export class DirectorsService {
     OMDbApiKey: string = '36827e98';
 
-    constructor(private firestore: AngularFirestore, private  http: HttpClient ) { }
+    directors$: Observable<any>;
+    movies$: Observable<any>;
 
-    getDirectors() {
-        return this.firestore.collection('directors')
-            .snapshotChanges()
-            .pipe(map(this.processSnapshot));
-    }
+    private directorsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
+    private moviesSubject: BehaviorSubject<any> = new BehaviorSubject([]);
 
-    getMovies() {
-        return this.firestore.collection('movies')
-            .snapshotChanges()
-            .pipe(map(this.processSnapshot));
+    constructor(private firestore: AngularFirestore, private  http: HttpClient ) {
+        this.directors$ = this.directorsSubject.asObservable();
+        this.movies$ = this.moviesSubject.asObservable();
+
+        this.getDirectors().subscribe(data => {
+            this.directorsSubject.next(data);
+        });
+
+        this.getMovies().subscribe(data => {
+            this.moviesSubject.next(data);
+        });
     }
 
     toggleBookmarkMovie(id: string, bookmarked: boolean) {
@@ -58,6 +63,18 @@ export class DirectorsService {
 
     getMovieDataFromIMDBApi(name: string, year: number) {
         return this.http.get(`//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${this.OMDbApiKey}`);
+    }
+
+    private getDirectors() {
+        return this.firestore.collection('directors')
+            .snapshotChanges()
+            .pipe(map(this.processSnapshot));
+    }
+
+    private getMovies() {
+        return this.firestore.collection('movies')
+            .snapshotChanges()
+            .pipe(map(this.processSnapshot));
     }
 
     private processSnapshot(data) {
