@@ -1,4 +1,7 @@
-<mat-card>
+<mat-card [ngClass]="{
+    'best-watched': bestMovieSeen,
+    'best-not-watched': !bestMovieSeen
+}">
     <mat-card-title>{{name}} > {{bestPictureName}}</mat-card-title>
     <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
     <mat-card-actions align="end">

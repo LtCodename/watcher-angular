@@ -2,3 +2,11 @@
     margin: 0 10px 10px 0;
     width: 360px;
 }
+
+.best-watched {
+    border-top: 5px solid green;
+}
+
+.best-not-watched {
+    border-top: 5px solid transparent;
+}

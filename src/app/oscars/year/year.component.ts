@@ -13,6 +13,7 @@ export class YearComponent implements OnInit, OnChanges {
   percentage: number = 0;
   bestPictureName: string = "";
   showYearsMovies: boolean = false;
+  bestMovieSeen: boolean = false;
 
   constructor() { }
 
@@ -30,6 +31,7 @@ export class YearComponent implements OnInit, OnChanges {
   calculateBestPicture(): void {
     const best = this.movies.filter((elem: IOscarMovie) => elem.best);
     this.bestPictureName = best.length ? best[0].name : "Unknown";
+    this.bestMovieSeen = best.length ? best[0].watched : false;
   }
 
   showMovies(): void {

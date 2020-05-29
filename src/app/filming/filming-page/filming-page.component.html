@@ -1,7 +1,7 @@
 <div class="column">
     <mat-spinner *ngIf="showSpinner"></mat-spinner>
 
-    <div class="row">
+    <div class="row" *ngIf="filming?.length">
         <app-movie
                 *ngFor="let filmingMovie of filming"
                 [name]="filmingMovie.name"
