@@ -11,11 +11,11 @@
       </mat-expansion-panel-header>
       <div class="column">
         <mat-form-field floatLabel="auto">
-            <mat-label>Director's name</mat-label>
+            <mat-label>Director name</mat-label>
             <input matInput required [(ngModel)]="directorName"/>
         </mat-form-field>
         <button mat-button (click)="addNewDirector()">Add</button>
-    </div>
+      </div>
     </mat-expansion-panel>
     <!-- Add Movie -->
     <mat-expansion-panel>
@@ -27,5 +27,25 @@
             Add Movie
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <div class="column">
+          <mat-form-field floatLabel="auto">
+              <mat-label>Movie name</mat-label>
+              <input matInput required [(ngModel)]="movieName"/>
+          </mat-form-field>
+          <button mat-button (click)="search()">Search</button>
+        </div>
       </mat-expansion-panel>
   </mat-accordion>
+
+  <div class="column">
+    <mat-card
+            *ngFor="let movie of searchResults"
+            class="search-result-movie">
+            <span>{{movie['Title']}}</span>
+    </mat-card>
+</div>
+
+
+<!-- [name]="director.name"
+[id]="director.id"
+[movies]="director.movies" -->

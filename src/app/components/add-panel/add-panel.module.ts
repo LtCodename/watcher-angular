@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -17,7 +19,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     FormsModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule,
+    MatCardModule
   ],
   exports: [AddDirectorsComponent]
 })

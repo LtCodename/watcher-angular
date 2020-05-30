@@ -4,11 +4,12 @@ import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { forkJoin, BehaviorSubject, Observable } from 'rxjs';
 
+export const OMDbApiKey: string = '36827e98';
+
 @Injectable({
     providedIn: 'root'
 })
 export class DirectorsService {
-    OMDbApiKey: string = '36827e98';
 
     directors$: Observable<any>;
     movies$: Observable<any>;
@@ -62,7 +63,7 @@ export class DirectorsService {
     }
 
     getMovieDataFromIMDBApi(name: string, year: number) {
-        return this.http.get(`//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${this.OMDbApiKey}`);
+        return this.http.get(`//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${OMDbApiKey}`);
     }
 
     private getDirectors() {

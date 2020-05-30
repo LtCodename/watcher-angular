@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddDirectorsComponent implements OnInit {
 
   directorName: string = "";
+  movieName: string = "";
+  searchResults: any = [];
 
   constructor(private addService: AddPanelService, private serverMessage: MatSnackBar) { }
 
@@ -34,6 +36,15 @@ export class AddDirectorsComponent implements OnInit {
       duration: 3000,
       horizontalPosition: "right"
     });
+  }
+
+  search(): void {
+    this.addService.searchApi(this.movieName).subscribe((res: any) => {
+      if(res['Response']) {
+        this.searchResults = res['Search'];
+        console.log(this.searchResults);
+      }
+    })
   }
 
   ngOnInit(): void {
