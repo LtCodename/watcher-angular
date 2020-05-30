@@ -37,15 +37,10 @@
       </mat-expansion-panel>
   </mat-accordion>
 
-  <div class="column">
-    <mat-card
-            *ngFor="let movie of searchResults"
-            class="search-result-movie">
-            <span>{{movie['Title']}}</span>
-    </mat-card>
+<div class="column">
+  <app-search-result-movie *ngFor="let movie of searchResults" 
+    class="search-result-movie"
+    [name]="movie['Title']"
+    [year]="movie['Year']">
+  </app-search-result-movie>
 </div>
-
-
-<!-- [name]="director.name"
-[id]="director.id"
-[movies]="director.movies" -->

@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { AddPanelModule } from './components/add-panel/add-panel.module';
 import { ConfirmWindowComponent } from './components/confirm-window/confirm-window.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConfirmWindowComponent } from './components/confirm-window/confirm-wind
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
-    AddPanelModule
+    AddPanelModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

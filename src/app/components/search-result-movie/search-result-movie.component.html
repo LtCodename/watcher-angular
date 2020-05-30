@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-content>{{name}}, {{year}}</mat-card-content>
+    <mat-card-content *ngIf="directorName.length" >{{directorName}}</mat-card-content>
+    <mat-card-actions align="end">
+        <button
+                mat-icon-button
+                matTooltip="Information"
+                matTooltipShowDelay="500"
+                (click)="getMovieData()"
+                color="primary">
+            <mat-icon>info</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

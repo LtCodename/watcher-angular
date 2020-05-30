@@ -8,11 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { SearchResultMovieComponent } from '../search-result-movie/search-result-movie.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @NgModule({
-  declarations: [AddDirectorsComponent],
+  declarations: [AddDirectorsComponent, SearchResultMovieComponent],
   imports: [
     CommonModule,
     MatExpansionModule,
@@ -21,7 +23,8 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   exports: [AddDirectorsComponent]
 })
