@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { SearchResultMovieComponent } from '../search-result-movie/search-result-movie.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -24,7 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatSnackBarModule,
     HttpClientModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [AddDirectorsComponent]
 })

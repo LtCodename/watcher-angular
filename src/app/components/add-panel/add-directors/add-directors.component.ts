@@ -42,7 +42,6 @@ export class AddDirectorsComponent implements OnInit {
     this.addService.searchApi(this.movieName).subscribe((res: any) => {
       if(res['Response']) {
         this.searchResults = res['Search'];
-        console.log(this.searchResults);
       }
     })
   }

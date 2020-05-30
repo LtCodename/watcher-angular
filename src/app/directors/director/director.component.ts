@@ -49,7 +49,6 @@ export class DirectorComponent implements OnInit, OnChanges {
   }
 
   removeDirector(id: string):void {
-    console.log(`removing director ${id}`);
     this.directorsService.deleteDirector(id).then(r => {
       this.confirmWindow .close();
       this.showServerMessage();

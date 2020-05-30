@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { forkJoin, BehaviorSubject, Observable } from 'rxjs';
+import { IDirector } from '../directors.model';
 
 export const OMDbApiKey: string = '36827e98';
 
@@ -11,7 +12,7 @@ export const OMDbApiKey: string = '36827e98';
 })
 export class DirectorsService {
 
-    directors$: Observable<any>;
+    directors$: Observable<IDirector[]>;
     movies$: Observable<any>;
 
     private directorsSubject: BehaviorSubject<any> = new BehaviorSubject([]);

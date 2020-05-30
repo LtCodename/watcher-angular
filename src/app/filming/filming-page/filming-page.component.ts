@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
 import { IFilmingMovie } from "../filming.model";
 import { DirectorsService } from 'src/app/directors/services/directors.service';
+import { IDirector } from 'src/app/directors/directors.model';
 
 @Component({
   selector: 'app-filming-page',
@@ -19,7 +20,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
     this.filmingService.filming$
         .pipe(
             takeUntil(this.notifier),
-            mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData) => [filmingData, directorData])))
+            mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData: IDirector[]) => [filmingData, directorData])))
         )
         .subscribe(([filmingData, directorData]) => {
           filmingData.forEach((filmingMovie: IFilmingMovie) => {

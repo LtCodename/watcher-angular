@@ -1,7 +1,25 @@
 <mat-card>
     <mat-card-content>{{name}}, {{year}}</mat-card-content>
     <mat-card-content *ngIf="directorName.length" >{{directorName}}</mat-card-content>
+
+    <mat-form-field>
+        <mat-label>Director</mat-label>
+        <mat-select [(value)]="directorsSelectValue">
+            <mat-option *ngFor="let director of directors" [value]="director.id">
+            {{director.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <mat-card-actions align="end">
+        <button
+                mat-icon-button
+                matTooltip="Add Movie"
+                matTooltipShowDelay="500"
+                (click)="addMovie()"
+                color="primary">
+            <mat-icon>add_circle</mat-icon>
+        </button>
         <button
                 mat-icon-button
                 matTooltip="Information"
