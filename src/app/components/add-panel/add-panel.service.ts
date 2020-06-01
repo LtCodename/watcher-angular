@@ -19,4 +19,13 @@ export class AddPanelService {
   searchApi(name: string) {
     return this.http.get(`//www.omdbapi.com/?s=${(name).toLowerCase()}&type=movie&apikey=${OMDbApiKey}`);
   }
+
+  addNewMovie(directorId: string, movieName: string, releaseYear: number) {
+    return this.firestore.collection('movies').add({
+      director: directorId,
+      name: movieName,
+      watched: false,
+      year: releaseYear
+    })
+  }
 }
