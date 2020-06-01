@@ -58,9 +58,13 @@ export class DirectorsService {
             director
         })
 
-        let removeFromFilming = this.firestore.collection('filming').doc(idToRemove).delete()
+        let removeFromFilming = this.firestore.collection('filming').doc(idToRemove).delete();
 
         return forkJoin([addToDirectors, removeFromFilming]);
+    }
+
+    removeMovieFromDirectors(id: string) {
+        return this.firestore.collection('movies').doc(id).delete();
     }
 
     getMovieDataFromIMDBApi(name: string, year: number) {

@@ -100,6 +100,19 @@ export class MovieComponent implements OnInit {
     })
   }
 
+  confirmRemoveFromDirectors(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeMovieFromDirectors(this.id)
+    }});
+  }
+
+  removeMovieFromDirectors(id: string): void {
+    this.directorsService.removeMovieFromDirectors(id).then((data) => {
+      this.confirmWindow.close();
+      this.showMessage('Updated successfully!');
+    })
+  }
+
   showMessage(msg: string): void {
     this.serverMessage.open(msg, 'Dismiss', {
       duration: 3000,

@@ -43,6 +43,15 @@
                 color="warn">
             <mat-icon>favorite</mat-icon>
         </button>
+        <button
+                *ngIf="showBookmarkButton"
+                mat-icon-button
+                matTooltip="Remove movie"
+                matTooltipShowDelay="500"
+                (click)="confirmRemoveFromDirectors()"
+                color="primary">
+            <mat-icon>delete</mat-icon>
+        </button>
         <!--/filming buttons-->
         <button
                 *ngIf="showReleasedButton"
