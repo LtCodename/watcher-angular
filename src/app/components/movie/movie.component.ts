@@ -113,6 +113,19 @@ export class MovieComponent implements OnInit {
     }});
   }
 
+  confirmRemoveFromOscars(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeMovieFromOscars(this.id)
+    }});
+  }
+
+  removeMovieFromOscars(id: string): void {
+    this.directorsService.removeMovieFromOscars(id).then((data) => {
+      this.confirmWindow.close();
+      this.showMessage('Updated successfully!');
+    })
+  }
+
   removeMovieFromDirectors(id: string): void {
     this.directorsService.removeMovieFromDirectors(id).then((data) => {
       this.confirmWindow.close();

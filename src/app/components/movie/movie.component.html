@@ -80,7 +80,7 @@
                 color="primary">
             <mat-icon>delete</mat-icon>
         </button>
-        <!--/filming buttons-->
+        <!--/oscars buttons-->
         <button
                 *ngIf="showWatchedOscarsButton && !watched"
                 mat-icon-button
@@ -98,6 +98,15 @@
                 (click)="toggleWatchedOscars()"
                 color="primary">
             <mat-icon>check_circle</mat-icon>
+        </button>
+        <button
+                *ngIf="showWatchedOscarsButton"
+                mat-icon-button
+                matTooltip="Remove movie"
+                matTooltipShowDelay="500"
+                (click)="confirmRemoveFromOscars()"
+                color="primary">
+            <mat-icon>delete</mat-icon>
         </button>
         <!--General buttons-->
         <button
