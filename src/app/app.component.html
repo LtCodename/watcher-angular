@@ -19,6 +19,7 @@
     <mat-sidenav [(opened)]="opened" mode="side">
         <div class="column column-center-vertical add-panel-content">
             <app-add-directors *ngIf="currentRoute === 'Directors'"></app-add-directors>
+            <app-add-filming *ngIf="currentRoute === 'Filming'"></app-add-filming>
             <!-- <a [routerLink]="['/admin']">Admin</a> -->
         </div>
     </mat-sidenav>

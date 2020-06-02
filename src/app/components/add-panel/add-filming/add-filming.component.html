@@ -1,0 +1,35 @@
+<mat-accordion>
+    <!-- Add Movie -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Movie
+            </mat-panel-title>
+            <mat-panel-description>
+                Add Movie
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="column">
+            <!-- Name Input -->
+            <mat-form-field floatLabel="auto">
+                <mat-label>Movie name</mat-label>
+                <input matInput required [(ngModel)]="movieName" />
+            </mat-form-field>
+            <!-- Year Input -->
+            <mat-form-field floatLabel="auto">
+                <mat-label>Movie year</mat-label>
+                <input matInput required [(ngModel)]="movieYear" />
+            </mat-form-field>
+            <!-- Director Input -->
+            <mat-form-field floatLabel="auto">
+                <mat-label>Movie director</mat-label>
+                <mat-select [(value)]="directorsSelectValue">
+                    <mat-option *ngFor="let director of directors" [value]="director.id">
+                    {{director.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button (click)="add()">Add</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

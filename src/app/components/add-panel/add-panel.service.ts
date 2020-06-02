@@ -28,4 +28,12 @@ export class AddPanelService {
       year: releaseYear
     })
   }
+
+  addNewFilmingMovie(directorId: string, movieName: string, releaseYear: number) {
+    return this.firestore.collection('filming').add({
+      director: directorId,
+      name: movieName,
+      year: releaseYear
+    })
+  }
 }
