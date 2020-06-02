@@ -13,11 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AddFilmingComponent } from './add-filming/add-filming.component';
+import { AddOscarsComponent } from './add-oscars/add-oscars.component';
 
 
 
 @NgModule({
-  declarations: [AddDirectorsComponent, SearchResultMovieComponent, AddFilmingComponent],
+  declarations: [AddDirectorsComponent, SearchResultMovieComponent, AddFilmingComponent, AddOscarsComponent],
   imports: [
     CommonModule,
     MatExpansionModule,
@@ -31,6 +32,6 @@ import { AddFilmingComponent } from './add-filming/add-filming.component';
     MatFormFieldModule,
     MatSelectModule
   ],
-  exports: [AddDirectorsComponent, AddFilmingComponent]
+  exports: [AddDirectorsComponent, AddFilmingComponent, AddOscarsComponent]
 })
 export class AddPanelModule { }

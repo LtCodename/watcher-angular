@@ -16,6 +16,12 @@ export class AddPanelService {
     })
   }
 
+  addNewYear(name: string) {
+    return this.firestore.collection('oscarYears').add({
+      name
+    })
+  }
+
   searchApi(name: string) {
     return this.http.get(`//www.omdbapi.com/?s=${(name).toLowerCase()}&type=movie&apikey=${OMDbApiKey}`);
   }
