@@ -33,6 +33,10 @@ export class OscarsService {
       .pipe(map(this.processSnapshot));
   }
 
+  deleteYear(id: string) {
+    return this.firestore.collection('oscarYears').doc(id).delete();
+  }
+
   getMovies() {
     return this.firestore.collection('oscarMovies')
       .snapshotChanges()

@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MovieModule } from '../components/movie/movie.module';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [OscarsPageComponent, YearComponent],
@@ -18,7 +19,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatCardModule,
     MatButtonModule,
     MovieModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatIconModule
   ]
 })
 export class OscarsModule { }

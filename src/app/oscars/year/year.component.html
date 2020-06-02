@@ -5,7 +5,15 @@
     <mat-card-title>{{name}} > {{bestPictureName}}</mat-card-title>
     <mat-progress-bar mode="determinate" value="{{percentage}}"></mat-progress-bar>
     <mat-card-actions align="end">
-        <button mat-button (click)="showMovies()">Movies</button>
+        <button
+                mat-icon-button
+                matTooltip="Remove year"
+                matTooltipShowDelay="500"
+                (click)="confirmRemove()"
+                color="primary">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-stroked-button (click)="showMovies()">Movies</button>
     </mat-card-actions>
 </mat-card>
 

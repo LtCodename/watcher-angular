@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { IOscarMovie } from '../oscars.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
+import { OscarsService } from '../services/oscars.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-year',
@@ -14,8 +18,28 @@ export class YearComponent implements OnInit, OnChanges {
   bestPictureName: string = "";
   showYearsMovies: boolean = false;
   bestMovieSeen: boolean = false;
+  confirmWindow: any;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog, 
+    private oscarsService: OscarsService, 
+    private serverMessage: MatSnackBar
+    ) { }
+
+  confirmRemove(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeYear(this.id)
+    }});
+  }
+
+  removeYear(id: string):void {
+    this.oscarsService.deleteYear(id).then(r => {
+      this.confirmWindow .close();
+      this.showServerMessage();
+    }).catch(data => {
+      this.showServerMessage(true);
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.calculatePercentage();
@@ -39,5 +63,15 @@ export class YearComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+  }
+
+  showServerMessage(error: boolean = false): void {
+    let message: string = "Updated successfully!";
+    if (error) message = "Error!";
+
+    this.serverMessage.open(message, 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "right"
+    });
   }
 }
