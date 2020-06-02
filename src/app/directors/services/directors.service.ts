@@ -67,6 +67,10 @@ export class DirectorsService {
         return this.firestore.collection('movies').doc(id).delete();
     }
 
+    removeMovieFromFilming(id: string) {
+        return this.firestore.collection('filming').doc(id).delete();
+    }
+
     getMovieDataFromIMDBApi(name: string, year: number) {
         return this.http.get(`//www.omdbapi.com/?t=${(name).toLowerCase()}&y=${year}&plot=full&apikey=${OMDbApiKey}`);
     }

@@ -71,6 +71,15 @@
                 color="primary">
             <mat-icon>create</mat-icon>
         </button>
+        <button
+                *ngIf="showReleasedButton"
+                mat-icon-button
+                matTooltip="Remove movie"
+                matTooltipShowDelay="500"
+                (click)="confirmRemoveFromFilming()"
+                color="primary">
+            <mat-icon>delete</mat-icon>
+        </button>
         <!--/filming buttons-->
         <button
                 *ngIf="showWatchedOscarsButton && !watched"

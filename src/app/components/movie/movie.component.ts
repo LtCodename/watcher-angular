@@ -106,8 +106,21 @@ export class MovieComponent implements OnInit {
     }});
   }
 
+  confirmRemoveFromFilming(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeMovieFromFilming(this.id)
+    }});
+  }
+
   removeMovieFromDirectors(id: string): void {
     this.directorsService.removeMovieFromDirectors(id).then((data) => {
+      this.confirmWindow.close();
+      this.showMessage('Updated successfully!');
+    })
+  }
+
+  removeMovieFromFilming(id: string): void {
+    this.directorsService.removeMovieFromFilming(id).then((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
     })
