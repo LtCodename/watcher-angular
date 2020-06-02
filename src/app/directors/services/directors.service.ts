@@ -39,8 +39,8 @@ export class DirectorsService {
         return this.firestore.collection('directors').doc(id).delete();
     }
     
-    updateYearInFilming(id: string, year: number) {
-        return this.firestore.collection('filming').doc(id).update({ year });
+    updateYearInFilming(id: string, year: number, name: string) {
+        return this.firestore.collection('filming').doc(id).update({ year, name });
     }
 
     toggleMovieWatchedStatus(id: string, watched: boolean) {

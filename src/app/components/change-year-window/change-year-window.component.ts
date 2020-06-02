@@ -4,8 +4,9 @@ import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 interface IChangeYearWindowInterface {
-  changeYearCallback(year: number): void;
-  oldYear: number;
+  changeDataCallback(year: number, name: string): void;
+  oldYear: any;
+  oldName: string;
 }
 
 @Component({
@@ -16,6 +17,7 @@ interface IChangeYearWindowInterface {
 export class ChangeYearWindowComponent implements OnInit {
 
   releaseYear: any = this.data.oldYear;
+  movieName: string = this.data.oldName;
 
   constructor(private message: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: IChangeYearWindowInterface) { }
 
@@ -31,7 +33,7 @@ export class ChangeYearWindowComponent implements OnInit {
       return;
     }
 
-    this.data.changeYearCallback(year);
+    this.data.changeDataCallback(year, this.movieName);
   }
 
   showMessage(mssg: string): void {

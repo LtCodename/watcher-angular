@@ -1,5 +1,9 @@
 <div class="column">
     <mat-form-field floatLabel="auto">
+        <mat-label>Movie Name</mat-label>
+        <input matInput required [(ngModel)]="movieName"/>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
         <mat-label>Release Year</mat-label>
         <input matInput required [(ngModel)]="releaseYear"/>
         <mat-hint>Year must me a number</mat-hint>

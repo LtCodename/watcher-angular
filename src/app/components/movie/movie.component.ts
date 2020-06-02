@@ -70,8 +70,8 @@ export class MovieComponent implements OnInit {
     })
   }
 
-  changeYearCallback(newYear: number): void {
-    this.directorsService.updateYearInFilming(this.id, newYear).then(response => {
+  changeDataCallback(newYear: number, newName: string): void {
+    this.directorsService.updateYearInFilming(this.id, newYear, newName).then(response => {
       this.yearChangeDialog.close();
       this.showMessage('Release year was updated!');
     }).catch(data => {
@@ -82,8 +82,9 @@ export class MovieComponent implements OnInit {
 
   showEditYearWindow(): void {
     this.yearChangeDialog = this.dialog.open(ChangeYearWindowComponent, {data: {
-      changeYearCallback: (year: number) => this.changeYearCallback(year),
-      oldYear: this.year
+      changeDataCallback: (year: number, name: string) => this.changeDataCallback(year, name),
+      oldYear: this.year,
+      oldName: this.name
     }});
   }
 
