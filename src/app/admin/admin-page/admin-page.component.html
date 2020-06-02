@@ -1,1 +1,16 @@
-<p>admin-page works!</p>
+<div class="row row-center-horizontal">
+    <div class="column">
+        <form class="column">
+            <mat-form-field floatLabel="auto">
+                <mat-label>Email</mat-label>
+                <input name="email" type="email" matInput required [(ngModel)]="email" />
+            </mat-form-field>
+            <mat-form-field floatLabel="auto">
+                <mat-label>Password</mat-label>
+                <input name="password" type="password" matInput required [(ngModel)]="password" />
+            </mat-form-field>
+        </form>
+        <button mat-button (click)="login()">Login</button>
+        <button mat-button (click)="logout()">Logout</button>
+    </div>
+</div>

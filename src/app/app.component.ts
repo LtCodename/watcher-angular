@@ -26,8 +26,11 @@ export class AppComponent implements OnInit{
           case "/theaters":
             this.currentRoute = 'Theaters';
           break;
+          case "/admin":
+            this.currentRoute = 'Admin Page';
+          break;
             default:
-              this.currentRoute = '> Home';
+              this.currentRoute = 'Home';
         }
       }
     });
