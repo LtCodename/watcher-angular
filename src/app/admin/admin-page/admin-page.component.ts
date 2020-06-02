@@ -10,8 +10,13 @@ export class AdminPageComponent implements OnInit {
 
   email: string = "";
   password: string = "";
+  user: any = null;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService) {
+    this.adminService.authToken$.subscribe(data => {
+      this.user = data;
+    })
+  }
 
   login(): void {
     this.adminService.loginUser(this.email, this.password).then(res => {

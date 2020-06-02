@@ -1,6 +1,6 @@
 <div class="row row-center-horizontal">
     <div class="column">
-        <form class="column">
+        <form class="column" *ngIf="!user">
             <mat-form-field floatLabel="auto">
                 <mat-label>Email</mat-label>
                 <input name="email" type="email" matInput required [(ngModel)]="email" />
@@ -10,7 +10,7 @@
                 <input name="password" type="password" matInput required [(ngModel)]="password" />
             </mat-form-field>
         </form>
-        <button mat-button (click)="login()">Login</button>
-        <button mat-button (click)="logout()">Logout</button>
+        <button *ngIf="!user" mat-button (click)="login()">Login</button>
+        <button *ngIf="user" mat-button (click)="logout()">Logout</button>
     </div>
 </div>
