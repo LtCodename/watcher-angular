@@ -35,6 +35,15 @@ export class AddPanelService {
     })
   }
 
+  addNewOscarsMovie(yearId: string, movieName: string, bestValue: boolean) {
+    return this.firestore.collection('oscarMovies').add({
+      year: yearId,
+      name: movieName,
+      watched: false,
+      best: bestValue
+    })
+  }
+
   addNewFilmingMovie(directorId: string, movieName: string, releaseYear: number) {
     return this.firestore.collection('filming').add({
       director: directorId,

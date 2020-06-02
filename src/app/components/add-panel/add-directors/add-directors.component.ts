@@ -40,6 +40,10 @@ export class AddDirectorsComponent implements OnInit {
 
   search(): void {
     this.addService.searchApi(this.movieName).subscribe((res: any) => {
+      if (res['Response'] === 'False') {
+        this.showServerMessage(false, "No result for this search!");
+      }
+
       if(res['Response']) {
         this.searchResults = res['Search'];
       }

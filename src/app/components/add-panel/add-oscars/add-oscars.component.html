@@ -41,6 +41,7 @@
   <app-search-result-movie *ngFor="let movie of searchResults" 
     class="search-result-movie"
     [name]="movie['Title']"
-    [year]="movie['Year']">
+    [year]="movie['Year']"
+    [mode]="'oscars'">
   </app-search-result-movie>
 </div>

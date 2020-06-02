@@ -2,11 +2,32 @@
     <mat-card-content>{{name}}, {{year}}</mat-card-content>
     <mat-card-content *ngIf="directorName.length" >{{directorName}}</mat-card-content>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="mode === 'directors'">
         <mat-label>Director</mat-label>
         <mat-select [(value)]="directorsSelectValue">
             <mat-option *ngFor="let director of directors" [value]="director.id">
             {{director.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="mode === 'oscars'">
+        <mat-label>Year</mat-label>
+        <mat-select [(value)]="yearSelectValue">
+            <mat-option *ngFor="let year of years" [value]="year.id">
+            {{year.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="mode === 'oscars'">
+        <mat-label>Best</mat-label>
+        <mat-select [(value)]="bestSelectValue">
+            <mat-option [value]="true">
+                Yes
+            </mat-option>
+            <mat-option [value]="false">
+                No
             </mat-option>
         </mat-select>
     </mat-form-field>

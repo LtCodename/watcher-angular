@@ -1,7 +1,15 @@
+import { IOscarMovie } from '../oscars/oscars.model';
+
 export interface IDirector {
     id: string;
     name: string;
     movies: IMovie[]
+}
+
+export interface IYear {
+    id: string;
+    name: string;
+    movies: IOscarMovie[]
 }
 
 export interface IMovie {
