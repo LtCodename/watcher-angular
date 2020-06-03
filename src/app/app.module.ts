@@ -18,16 +18,26 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from './components/change-year-window/change-year-window.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
-import { AddPanelModule } from './components/add-panel/add-panel.module';
 import { ConfirmWindowComponent } from './components/confirm-window/confirm-window.component';
 import { MatCardModule } from '@angular/material/card';
+import { AddDirectorsComponent } from './components/add-panel/add-directors/add-directors.component';
+import { SearchResultMovieComponent } from './components/search-result-movie/search-result-movie.component';
+import { AddFilmingComponent } from './components/add-panel/add-filming/add-filming.component';
+import { AddOscarsComponent } from './components/add-panel/add-oscars/add-oscars.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieDataWindowComponent,
     ChangeYearWindowComponent,
-    ConfirmWindowComponent
+    ConfirmWindowComponent,
+    AddDirectorsComponent,
+    SearchResultMovieComponent,
+    AddFilmingComponent,
+    AddOscarsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +54,10 @@ import { MatCardModule } from '@angular/material/card';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
-    AddPanelModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
