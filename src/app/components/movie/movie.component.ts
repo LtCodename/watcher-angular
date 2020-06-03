@@ -27,6 +27,7 @@ export class MovieComponent implements OnInit {
   @Input() mode: string = '';
   @Input() showWatchedDirectorButton: boolean = false;
   @Input() showWatchedOscarsButton: boolean = false;
+  @Input() showWatchedTheatersButton: boolean = false;
   @Input() showInfoButton: boolean = false;
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
@@ -51,6 +52,18 @@ export class MovieComponent implements OnInit {
 
   toggleWatchedOscars(): void {
     this.directorsService.toggleWatchedOscars(this.id, !this.watched).then(response => {
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
+    })
+  }
+
+  toggleWatchedTheaters(): void {
+    this.directorsService.toggleWatchedTheaters(this.id, !this.watched).then(response => {
       this.showMessage('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {

@@ -4,6 +4,9 @@
         *ngFor="let movie of movies"
         [name]="movie.name"
         [id]="movie.id"
+        [watched]="movie.watched"
+        [showInfoButton]="true"
+        [showWatchedTheatersButton]="true"
         [mode]="'theatersMode'">
     </app-movie>
 </div>

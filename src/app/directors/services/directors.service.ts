@@ -51,6 +51,10 @@ export class DirectorsService {
         return this.firestore.collection('oscarMovies').doc(id).update({ watched });
     }
 
+    toggleWatchedTheaters(id: string, watched: boolean) {
+        return this.firestore.collection('theaters').doc(id).update({ watched });
+    }
+
     releaseMovie(name: string, year: number, director: string, idToRemove: string ) {
         let addToDirectors = this.firestore.collection('movies').add({
             name,

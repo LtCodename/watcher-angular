@@ -18,6 +18,10 @@
     border-top: 5px solid green;
 }
 
+.movie-card-not-watched {
+    border-top: 5px solid transparent;
+}
+
 .mat-card-theaters {
     width: 180px;
 }

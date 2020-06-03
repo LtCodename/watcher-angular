@@ -3,7 +3,8 @@
     'mat-card-directors': mode === 'directorsMode', 
     'mat-card-oscars': mode === 'oscarsMode',
     'mat-card-theaters': mode === 'theatersMode',
-    'movie-card-watched': watched
+    'movie-card-watched': watched,
+    'movie-card-not-watched': !watched
 }">
     <mat-card-title *ngIf="mode !== 'theatersMode'">{{name}}</mat-card-title>
     <mat-card-content *ngIf="mode === 'theatersMode'">{{name}}</mat-card-content>
@@ -109,6 +110,25 @@
                 (click)="confirmRemoveFromOscars()"
                 color="primary">
             <mat-icon>delete</mat-icon>
+        </button>
+        <!--Theaters buttons-->
+        <button
+                *ngIf="showWatchedTheatersButton && watched"
+                mat-icon-button
+                matTooltip="Remove from 'Watched'"
+                matTooltipShowDelay="500"
+                (click)="toggleWatchedTheaters()"
+                color="primary">
+            <mat-icon>check_circle</mat-icon>
+        </button>
+        <button
+                *ngIf="showWatchedTheatersButton && !watched"
+                mat-icon-button
+                matTooltip="Add to 'Watched'"
+                matTooltipShowDelay="500"
+                (click)="toggleWatchedTheaters()"
+                color="primary">
+            <mat-icon>check_circle_outline</mat-icon>
         </button>
         <!--General buttons-->
         <button
