@@ -1,17 +1,10 @@
 <div class="column">
     <mat-spinner *ngIf="showSpinner"></mat-spinner>
-    {{years | json}}
-    <!-- <div class="row" *ngIf="filming?.length">
-        <app-movie
-                *ngFor="let filmingMovie of filming"
-                [name]="filmingMovie.name"
-                [director]="filmingMovie.director"
-                [directorName]="filmingMovie.directorData.name"
-                [year]="filmingMovie.year"
-                [id]="filmingMovie.id"
-                [showReleasedButton]="true"
-                [showInfoButton]="true"
-                [mode]="'filmingMode'">
-        </app-movie>
-    </div> -->
+
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab [label]="year.yearName" *ngFor="let year of years">
+            <app-theaters-year [yearData]="year">
+            </app-theaters-year>
+        </mat-tab>
+    </mat-tab-group>
 </div>

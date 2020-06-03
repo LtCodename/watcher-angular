@@ -3,11 +3,22 @@ import { TheatersService } from '../services/theaters.service';
 import { takeUntil, mergeMap, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+export interface ITheaterMovie {
+  id: string;
+  month: number;
+  name: string;
+  priority: boolean;
+  releaseYear?: number;
+  watched: boolean;
+  year: number;
+}
+
 @Component({
   selector: 'app-theaters-page',
   templateUrl: './theaters-page.component.html',
   styleUrls: ['./theaters-page.component.css']
 })
+
 export class TheatersPageComponent implements OnInit {
 
   private notifier = new Subject();
@@ -15,22 +26,39 @@ export class TheatersPageComponent implements OnInit {
   showSpinner = true;
   
   constructor(private theaterService: TheatersService) { 
-    // this.theaterService.years$
-    //   .pipe(
-    //       takeUntil(this.notifier),
-    //       mergeMap((yearsData) => this.theaterService.movies$.pipe(map((moviesData: any) => [yearsData, moviesData])))
-    //   )
-    //   .subscribe(([yearsData, moviesData]) => {
-    //     yearsData.forEach((year: any) => {
-    //       year.movies = moviesData.find(movie => movie.year === year.year);
-    //     });
-    //     this.years = yearsData;
-    //     console.log(this.years);
-    //     this.showSpinner = false;
-    //   }, () => {
-    //     this.showSpinner = false;
-    //     // Add some error processing here
-    // });
+    this.theaterService.movies$.subscribe((movies: ITheaterMovie[]) => {
+      //console.log(movies);
+      this.years = [];
+      const moviesByYear = {};
+      movies.forEach((movie: ITheaterMovie) => {
+        moviesByYear[movie.year] = moviesByYear[movie.year] || {};
+        moviesByYear[movie.year][movie.month] = moviesByYear[movie.year][movie.month] || [];
+        moviesByYear[movie.year][movie.month].push(movie);
+      });
+
+      Object.keys(moviesByYear).forEach((yearName: string) => {
+        const yearBlueprint = {
+          yearName,
+          months: []
+        }
+
+        Object.keys(moviesByYear[yearName]).forEach((elem: string) => {
+          yearBlueprint.months.push({
+            monthName: elem,
+            movies: moviesByYear[yearName][elem]
+          });
+        });
+
+        this.years.push(yearBlueprint);
+        this.showSpinner = false;
+      });
+
+      //console.log(this.years);
+
+      //console.log(moviesByYear);
+    }, () => {
+      this.showSpinner = false;
+    })
   }
 
   ngOnInit(): void {
