@@ -5,6 +5,7 @@ import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
 import { ConfirmWindowComponent } from '../confirm-window/confirm-window.component';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-movie',
@@ -51,9 +52,12 @@ export class MovieComponent implements OnInit {
   toggleWatchedOscars(): void {
     this.directorsService.toggleWatchedOscars(this.id, !this.watched).then(response => {
       this.showMessage('Updated successfully!');
-    }).catch(data => {
-      this.showMessage('Error!');
-      this.yearChangeDialog.close();
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -67,6 +71,13 @@ export class MovieComponent implements OnInit {
     this.directorsService.releaseMovie(this.name, this.year, this.director, this.id).subscribe((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
+    }, (error) => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -74,9 +85,13 @@ export class MovieComponent implements OnInit {
     this.directorsService.updateYearInFilming(this.id, newYear, newName).then(response => {
       this.yearChangeDialog.close();
       this.showMessage('Release year was updated!');
-    }).catch(data => {
-      this.showMessage('Error!');
+    }).catch(error => {
       this.yearChangeDialog.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -123,6 +138,13 @@ export class MovieComponent implements OnInit {
     this.directorsService.removeMovieFromOscars(id).then((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -130,6 +152,13 @@ export class MovieComponent implements OnInit {
     this.directorsService.removeMovieFromDirectors(id).then((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -137,12 +166,19 @@ export class MovieComponent implements OnInit {
     this.directorsService.removeMovieFromFilming(id).then((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
-  showMessage(msg: string): void {
+  showMessage(msg: string, time: number = 3000): void {
     this.serverMessage.open(msg, 'Dismiss', {
-      duration: 3000,
+      duration: time,
       horizontalPosition: "right"
     });
   }

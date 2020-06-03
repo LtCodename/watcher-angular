@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { OscarsService } from '../services/oscars.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-year',
@@ -35,9 +36,14 @@ export class YearComponent implements OnInit, OnChanges {
   removeYear(id: string):void {
     this.oscarsService.deleteYear(id).then(r => {
       this.confirmWindow .close();
-      this.showServerMessage();
-    }).catch(data => {
-      this.showServerMessage(true);
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow .close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -65,12 +71,9 @@ export class YearComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  showServerMessage(error: boolean = false): void {
-    let message: string = "Updated successfully!";
-    if (error) message = "Error!";
-
-    this.serverMessage.open(message, 'Dismiss', {
-      duration: 3000,
+  showMessage(msg: string, time: number = 3000): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: time,
       horizontalPosition: "right"
     });
   }

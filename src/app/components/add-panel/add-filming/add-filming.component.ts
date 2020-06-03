@@ -3,6 +3,7 @@ import { DirectorsService } from 'src/app/directors/services/directors.service';
 import { IDirector } from 'src/app/directors/directors.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel.service';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-add-filming',
@@ -28,17 +29,17 @@ export class AddFilmingComponent implements OnInit {
 
   add(): void {
     if (!this.movieName.length) {
-      this.showServerMessage(false, "Enter movie name!");
+      this.showMessage("Enter movie name!");
       return;
     }
 
     if (!this.movieYear) {
-      this.showServerMessage(false, "Enter movie release year!");
+      this.showMessage("Enter movie release year!");
       return;
     }
 
     if (!this.directorsSelectValue.length) {
-      this.showServerMessage(false, "Select director for a movie!");
+      this.showMessage("Select director for a movie!");
       return;
     }
 
@@ -46,20 +47,22 @@ export class AddFilmingComponent implements OnInit {
       this.movieName = "";
       this.movieYear = "";
       this.directorsSelectValue = "";
-      this.showServerMessage(false, "New movie added!");
-    }).catch(() => {
-      this.showServerMessage(true);
+      this.showMessage("New movie added!");
+    }).catch((error) => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
   ngOnInit(): void {
   }
 
-  showServerMessage(error: boolean = false, message: string =  "Updated successfully!"): void {
-    if (error) message = "Error!";
-
-    this.serverMessage.open(message, 'Dismiss', {
-      duration: 3000,
+  showMessage(msg: string, time: number = 3000): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: time,
       horizontalPosition: "right"
     });
   }

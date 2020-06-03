@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel/add-panel.service';
 import { OscarsService } from 'src/app/oscars/services/oscars.service';
 import { IOscarMovie } from 'src/app/oscars/oscars.model';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-search-result-movie',
@@ -51,7 +52,7 @@ export class SearchResultMovieComponent implements OnInit {
   addMovie(): void {
     if(this.mode === 'directors') {
       if(!this.directorsSelectValue.length) {
-        this.showServerMessage('You need to select a director!');
+        this.showMessage('You need to select a director!');
         return;
       }
   
@@ -63,18 +64,22 @@ export class SearchResultMovieComponent implements OnInit {
       }
   
       if (foundMovie) {
-        this.showServerMessage('Movie is already exists!');
+        this.showMessage('Movie is already exists!');
         return;
       }
   
       this.addPanelService.addNewMovie(this.directorsSelectValue, this.name, parseInt(this.year)).then(r => {
-        this.showServerMessage('Updated successfully!');
-      }).catch(e => {
-        this.showServerMessage('Error!');
+        this.showMessage('Updated successfully!');
+      }).catch((error) => {
+        if (error.message && error.message === "Missing or insufficient permissions.") {
+          this.showMessage(AuthErrorMessage, 7000);
+        } else {
+          this.showMessage("Error!");
+        }
       })
     } else {
       if(!this.yearSelectValue.length) {
-        this.showServerMessage('You need to select a year!');
+        this.showMessage('You need to select a year!');
         return;
       }
 
@@ -86,21 +91,25 @@ export class SearchResultMovieComponent implements OnInit {
       }
   
       if (foundMovie) {
-        this.showServerMessage('Movie is already exists!');
+        this.showMessage('Movie is already exists!');
         return;
       }
       
       this.addPanelService.addNewOscarsMovie(this.yearSelectValue, this.name, this.bestSelectValue).then(r => {
-        this.showServerMessage('Updated successfully!');
-      }).catch(e => {
-        this.showServerMessage('Error!');
+        this.showMessage('Updated successfully!');
+      }).catch(error => {
+        if (error.message && error.message === "Missing or insufficient permissions.") {
+          this.showMessage(AuthErrorMessage, 7000);
+        } else {
+          this.showMessage("Error!");
+        }
       })
     }
   }
 
-  showServerMessage(message: string): void {
-    this.serverMessage.open(message, 'Dismiss', {
-      duration: 3000,
+  showMessage(msg: string, time: number = 3000): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: time,
       horizontalPosition: "right"
     });
   }

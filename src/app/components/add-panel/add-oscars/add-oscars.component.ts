@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddPanelService } from '../add-panel.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-add-oscars',
@@ -20,22 +21,26 @@ export class AddOscarsComponent implements OnInit {
 
   addNewYear(): void {
     if (!this.year.length) {
-      this.showServerMessage(false, "Enter proper year!");
+      this.showMessage("Enter proper year!");
       return;
     }
 
     this.addService.addNewYear(this.year).then(() => {
       this.year = "";
-      this.showServerMessage(false, "New year added!");
-    }).catch(() => {
-      this.showServerMessage(true);
+      this.showMessage("New year added!");
+    }).catch((error) => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
   search(): void {
     this.addService.searchApi(this.movieName).subscribe((res: any) => {
       if (res['Response'] === 'False') {
-        this.showServerMessage(false, "No result for this search!");
+        this.showMessage("No result for this search!");
       }
       
       if(res['Response']) {
@@ -44,13 +49,10 @@ export class AddOscarsComponent implements OnInit {
     })
   }
 
-  showServerMessage(error: boolean = false, message: string =  "Updated successfully!"): void {
-    if (error) message = "Error!";
-
-    this.serverMessage.open(message, 'Dismiss', {
-      duration: 3000,
+  showMessage(msg: string, time: number = 3000): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: time,
       horizontalPosition: "right"
     });
   }
-
 }

@@ -4,6 +4,7 @@ import { DirectorsService } from "../services/directors.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-director',
@@ -51,9 +52,14 @@ export class DirectorComponent implements OnInit, OnChanges {
   removeDirector(id: string):void {
     this.directorsService.deleteDirector(id).then(r => {
       this.confirmWindow .close();
-      this.showServerMessage();
-    }).catch(data => {
-      this.showServerMessage(true);
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow .close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
@@ -65,26 +71,31 @@ export class DirectorComponent implements OnInit, OnChanges {
 
   toggleFavoritesDirectors(id: string, bookmarked: boolean):void {
     this.directorsService.toggleBookmarkMovie(id, bookmarked).then(r => {
-      this.showServerMessage();
-    }).catch(data => {
-      this.showServerMessage(true);
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
   toggleWatchedDirectors(id: string, watched: boolean):void {
     this.directorsService.toggleMovieWatchedStatus(id, watched).then(r => {
-      this.showServerMessage();
-    }).catch(data => {
-      this.showServerMessage(true);
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
     })
   }
 
-  showServerMessage(error: boolean = false): void {
-    let message: string = "Updated successfully!";
-    if (error) message = "Error!";
-
-    this.serverMessage.open(message, 'Dismiss', {
-      duration: 3000,
+  showMessage(msg: string, time: number = 3000): void {
+    this.serverMessage.open(msg, 'Dismiss', {
+      duration: time,
       horizontalPosition: "right"
     });
   }
