@@ -18,20 +18,20 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
 
   constructor(private filmingService: FilmingService, private directorsService: DirectorsService ) {
     this.filmingService.filming$
-        .pipe(
-            takeUntil(this.notifier),
-            mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData: IDirector[]) => [filmingData, directorData])))
-        )
-        .subscribe(([filmingData, directorData]) => {
-          filmingData.forEach((filmingMovie: IFilmingMovie) => {
-            filmingMovie.directorData = directorData.find(director => director.id === filmingMovie.director);
-          });
-          this.filming = filmingData;
-          this.showSpinner = false;
-        }, () => {
-          this.showSpinner = false;
-          // Add some error processing here
+      .pipe(
+          takeUntil(this.notifier),
+          mergeMap((filmingData) => this.directorsService.directors$.pipe(map((directorData: IDirector[]) => [filmingData, directorData])))
+      )
+      .subscribe(([filmingData, directorData]) => {
+        filmingData.forEach((filmingMovie: IFilmingMovie) => {
+          filmingMovie.directorData = directorData.find(director => director.id === filmingMovie.director);
         });
+        this.filming = filmingData;
+        this.showSpinner = false;
+      }, () => {
+        this.showSpinner = false;
+        // Add some error processing here
+    });
   }
 
   ngOnInit(): void {

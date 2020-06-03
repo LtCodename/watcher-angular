@@ -17,8 +17,8 @@ export class FilmingService {
 
     this.getFilming().subscribe(data => {
       this.filmingSubject.next(data);
-  });
-   }
+    });
+  }
 
   getFilming() {
     return this.firestore.collection('filming')
