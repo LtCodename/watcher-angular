@@ -1,0 +1,9 @@
+<div class="mat-h2">{{names[name]}}</div>
+<div class="column">
+    <app-movie
+        *ngFor="let movie of movies"
+        [name]="movie.name"
+        [id]="movie.id"
+        [mode]="'theatersMode'">
+    </app-movie>
+</div>

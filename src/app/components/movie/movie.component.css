@@ -17,3 +17,7 @@
 .movie-card-watched {
     border-top: 5px solid green;
 }
+
+.mat-card-theaters {
+    width: 180px;
+}

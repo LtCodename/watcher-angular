@@ -3,7 +3,7 @@
 
     <mat-tab-group mat-align-tabs="center">
         <mat-tab [label]="year.yearName" *ngFor="let year of years">
-            <app-theaters-year [yearData]="year">
+            <app-theaters-year [monthsData]="year.months">
             </app-theaters-year>
         </mat-tab>
     </mat-tab-group>

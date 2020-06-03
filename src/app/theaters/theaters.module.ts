@@ -5,16 +5,19 @@ import { TheatersRoutingModule } from "./theaters-routing.module";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TheatersYearComponent } from './theaters-year/theaters-year.component';
+import { TheatersMonthComponent } from './theaters-month/theaters-month.component';
+import { MovieModule } from '../components/movie/movie.module';
 
 
 
 @NgModule({
-  declarations: [TheatersPageComponent, TheatersYearComponent],
+  declarations: [TheatersPageComponent, TheatersYearComponent, TheatersMonthComponent],
   imports: [
     CommonModule,
     TheatersRoutingModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MovieModule
   ]
 })
 export class TheatersModule { }

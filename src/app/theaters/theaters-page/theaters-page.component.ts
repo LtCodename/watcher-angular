@@ -42,12 +42,12 @@ export class TheatersPageComponent implements OnInit {
           months: []
         }
 
-        Object.keys(moviesByYear[yearName]).forEach((elem: string) => {
+        for (let i = 1; i <= 12; i++) {
           yearBlueprint.months.push({
-            monthName: elem,
-            movies: moviesByYear[yearName][elem]
+            monthName: `${i}`,
+            movies: moviesByYear[yearName][`${i}`] || []
           });
-        });
+        }
 
         this.years.push(yearBlueprint);
         this.showSpinner = false;

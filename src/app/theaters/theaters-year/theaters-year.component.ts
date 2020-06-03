@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TheatersYearComponent implements OnInit {
 
-  @Input() yearData: any;
+  @Input() monthsData: any;
 
   constructor() { }
 

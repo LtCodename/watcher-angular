@@ -1,1 +1,6 @@
-{{yearData | json}}
+<div class="row theaters-movies-wrapper">
+    <app-theaters-month *ngFor="let month of monthsData"
+        [movies]="month.movies"
+        [name]="month.monthName">
+    </app-theaters-month>
+</div>

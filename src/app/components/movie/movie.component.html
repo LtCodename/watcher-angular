@@ -1,10 +1,12 @@
 <mat-card [ngClass]="{
     'mat-card-filming': mode === 'filmingMode', 
     'mat-card-directors': mode === 'directorsMode', 
-    'mat-card-oscars': mode === 'oscarsMode', 
+    'mat-card-oscars': mode === 'oscarsMode',
+    'mat-card-theaters': mode === 'theatersMode',
     'movie-card-watched': watched
 }">
-    <mat-card-title>{{name}}</mat-card-title>
+    <mat-card-title *ngIf="mode !== 'theatersMode'">{{name}}</mat-card-title>
+    <mat-card-content *ngIf="mode === 'theatersMode'">{{name}}</mat-card-content>
     <mat-card-actions align="end">
         <!--/directors buttons-->
         <button
