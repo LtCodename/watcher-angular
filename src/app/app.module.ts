@@ -28,6 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { TheatersDataWindowComponent } from './components/theaters-data-window/theaters-data-window.component';
+import { AddTheatersComponent } from './components/add-panel/add-theaters/add-theaters.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TheatersDataWindowComponent } from './components/theaters-data-window/t
     SearchResultMovieComponent,
     AddFilmingComponent,
     AddOscarsComponent,
-    TheatersDataWindowComponent
+    TheatersDataWindowComponent,
+    AddTheatersComponent
   ],
   imports: [
     BrowserModule,

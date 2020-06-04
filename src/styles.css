@@ -42,3 +42,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card-title {
     line-height: initial;
 }
+
+.search-result-movie {
+    margin-top: 10px;
+    max-width: 228px;
+}

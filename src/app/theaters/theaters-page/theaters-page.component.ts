@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TheatersService } from '../services/theaters.service';
-import { takeUntil, mergeMap, map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 export interface ITheaterMovie {
   id: string;
@@ -21,13 +19,11 @@ export interface ITheaterMovie {
 
 export class TheatersPageComponent implements OnInit {
 
-  private notifier = new Subject();
   years: any = [];
   showSpinner = true;
   
   constructor(private theaterService: TheatersService) { 
     this.theaterService.movies$.subscribe((movies: ITheaterMovie[]) => {
-      //console.log(movies);
       this.years = [];
       const moviesByYear = {};
       movies.forEach((movie: ITheaterMovie) => {

@@ -1,6 +1,6 @@
-<div class="column">
-    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+<mat-spinner *ngIf="showSpinner"></mat-spinner>
 
+<div class="column" *ngIf="!showSpinner">
     <mat-tab-group mat-align-tabs="center" animationDuration="0">
         <mat-tab [label]="year.yearName" *ngFor="let year of years">
             <app-theaters-year [monthsData]="year.months">

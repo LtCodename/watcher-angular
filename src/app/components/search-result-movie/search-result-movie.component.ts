@@ -25,6 +25,59 @@ export class SearchResultMovieComponent implements OnInit {
   directorsSelectValue: string = "";
   yearSelectValue: string = "";
   bestSelectValue: boolean = false;
+  yearWatchedSelectedValue: number;
+  monthWatchedSelectedValue: number;
+
+  months = [
+    {
+      name: 'January',
+      id: 1
+    },
+    {
+      name: 'February',
+      id: 2
+    },
+    {
+      name: 'March',
+      id: 3
+    },
+    {
+      name: 'April',
+      id: 4
+    },
+    {
+      name: 'May',
+      id: 5
+    },
+    {
+      name: 'June',
+      id: 6
+    },
+    {
+      name: 'July',
+      id: 7
+    },
+    {
+      name: 'August',
+      id: 8
+    },
+    {
+      name: 'September',
+      id: 9
+    },
+    {
+      name: 'October',
+      id: 10
+    },
+    {
+      name: 'November',
+      id: 11
+    },
+    {
+      name: 'December',
+      id: 12
+    }
+  ]
 
   constructor(
       private directorsService: DirectorsService, 
@@ -77,7 +130,7 @@ export class SearchResultMovieComponent implements OnInit {
           this.showMessage("Error!");
         }
       })
-    } else {
+    } else if (this.mode === 'oscars') {
       if(!this.yearSelectValue.length) {
         this.showMessage('You need to select a year!');
         return;
@@ -96,6 +149,32 @@ export class SearchResultMovieComponent implements OnInit {
       }
       
       this.addPanelService.addNewOscarsMovie(this.yearSelectValue, this.name, this.bestSelectValue).then(r => {
+        this.showMessage('Updated successfully!');
+      }).catch(error => {
+        if (error.message && error.message === "Missing or insufficient permissions.") {
+          this.showMessage(AuthErrorMessage, 7000);
+        } else {
+          this.showMessage("Error!");
+        }
+      })
+    } else {
+      if(!this.yearWatchedSelectedValue) {
+        this.showMessage('You need to select a year!');
+        return;
+      }
+
+      if(!this.monthWatchedSelectedValue) {
+        this.showMessage('You need to select a month!');
+        return;
+      }
+
+      //TODO checl movie for duplicates
+      
+      this.addPanelService.addNewTheatersMovie(
+        this.name, 
+        parseInt(this.year), 
+        this.yearWatchedSelectedValue, 
+        this.monthWatchedSelectedValue).then(r => {
         this.showMessage('Updated successfully!');
       }).catch(error => {
         if (error.message && error.message === "Missing or insufficient permissions.") {

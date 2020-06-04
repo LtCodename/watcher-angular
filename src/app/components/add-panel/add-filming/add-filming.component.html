@@ -25,7 +25,7 @@
                 <mat-label>Movie director</mat-label>
                 <mat-select [(value)]="directorsSelectValue">
                     <mat-option *ngFor="let director of directors" [value]="director.id">
-                    {{director.name}}
+                        {{director.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

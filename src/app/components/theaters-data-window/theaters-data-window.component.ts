@@ -19,6 +19,7 @@ export class TheatersDataWindowComponent implements OnInit {
   movieName: string = this.data.oldName;
   watchYear: number = this.data.oldYear;
   monthSelectValue: number = this.data.oldMonth;
+
   months = [
     {
       name: 'January',

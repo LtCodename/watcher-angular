@@ -1,0 +1,29 @@
+<mat-accordion>
+    <!-- Add Movie -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Movie
+            </mat-panel-title>
+            <mat-panel-description>
+            Add Movie
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="column">
+            <mat-form-field floatLabel="auto">
+                <mat-label>Movie name</mat-label>
+                <input matInput required [(ngModel)]="movieSearchName"/>
+            </mat-form-field>
+            <button mat-button (click)="search()">Search</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="column">
+    <app-search-result-movie *ngFor="let movie of searchResults" 
+      class="search-result-movie"
+      [name]="movie['Title']"
+      [year]="movie['Year']"
+      [mode]="'theaters'">
+    </app-search-result-movie>
+  </div>

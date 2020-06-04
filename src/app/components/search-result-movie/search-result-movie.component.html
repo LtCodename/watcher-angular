@@ -32,6 +32,30 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-form-field *ngIf="mode === 'theaters'">
+        <mat-label>Year I watched it</mat-label>
+        <mat-select [(value)]="yearWatchedSelectedValue">
+            <mat-option [value]="2019">
+                2019
+            </mat-option>
+            <mat-option [value]="2020">
+                2020
+            </mat-option>
+            <mat-option [value]="2021">
+                2021
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="mode === 'theaters'">
+        <mat-label>Month I watched it</mat-label>
+        <mat-select [(value)]="monthWatchedSelectedValue">
+            <mat-option *ngFor="let month of months" [value]="month.id">
+                {{month.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <mat-card-actions align="end">
         <button
                 mat-icon-button

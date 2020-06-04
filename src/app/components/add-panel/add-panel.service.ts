@@ -44,6 +44,15 @@ export class AddPanelService {
     })
   }
 
+  addNewTheatersMovie(movieName: string, movieYear: number, yearWatched: number, monthWatched: number) {
+    return this.firestore.collection('theaters').add({
+      name: movieName,
+      releaseYear: movieYear,
+      year: yearWatched,
+      month: monthWatched
+    })
+  }
+
   addNewFilmingMovie(directorId: string, movieName: string, releaseYear: number) {
     return this.firestore.collection('filming').add({
       director: directorId,

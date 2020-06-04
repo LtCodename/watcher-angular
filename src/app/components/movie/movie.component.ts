@@ -34,6 +34,7 @@ export class MovieComponent implements OnInit {
   @Input() showInfoButton: boolean = false;
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
+  @Input() releasedYear: number;
 
   @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedDirectors: EventEmitter<void> = new EventEmitter();
@@ -155,7 +156,12 @@ export class MovieComponent implements OnInit {
   }
 
   getMovieData(): void {
-    this.directorsService.getMovieDataFromIMDBApi(this.name, this.year).subscribe(response => {
+    let yearForDb: number = this.year;
+    if(this.mode === 'theatersMode') {
+      yearForDb = this.releasedYear;
+    }
+
+    this.directorsService.getMovieDataFromIMDBApi(this.name, yearForDb).subscribe(response => {
       if (response['Error']) {
         this.showMessage('Movie not found, update release year!');
         return;
