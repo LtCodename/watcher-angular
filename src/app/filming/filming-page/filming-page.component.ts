@@ -2,9 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FilmingService } from "../services/filming.service";
 import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
-import { IFilmingMovie } from "../filming.model";
 import { DirectorsService } from 'src/app/directors/services/directors.service';
-import { IDirector } from 'src/app/directors/directors.model';
+import { IDirector, IFilmingMovie } from 'src/interface';
 
 @Component({
   selector: 'app-filming-page',

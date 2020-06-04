@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-
-interface IChangeYearWindowInterface {
-  changeDataCallback(year: number, name: string): void;
-  oldYear: any;
-  oldName: string;
-}
+import { IChangeYearWindow } from 'src/interface';
 
 @Component({
   selector: 'app-change-year-window',
@@ -19,7 +14,7 @@ export class ChangeYearWindowComponent implements OnInit {
   releaseYear: any = this.data.oldYear;
   movieName: string = this.data.oldName;
 
-  constructor(private message: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: IChangeYearWindowInterface) { }
+  constructor(private message: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: IChangeYearWindow) { }
 
   sumbitNewReleaseYear(): void {
     let year: number = parseInt(this.releaseYear);

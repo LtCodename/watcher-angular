@@ -3,7 +3,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { forkJoin, BehaviorSubject, Observable } from 'rxjs';
-import { IDirector } from '../directors.model';
+import { IDirector } from 'src/interface';
 
 export const OMDbApiKey: string = '36827e98';
 

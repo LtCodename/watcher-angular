@@ -1,15 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TheatersService } from '../services/theaters.service';
-
-export interface ITheaterMovie {
-  id: string;
-  month: number;
-  name: string;
-  priority: boolean;
-  releaseYear?: number;
-  watched: boolean;
-  year: number;
-}
+import { ITheaterMovie } from 'src/interface';
 
 @Component({
   selector: 'app-theaters-page',

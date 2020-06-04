@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DirectorsService } from '../services/directors.service';
 import { Subject } from "rxjs";
-import { map, mergeMap, takeUntil, skip, tap } from "rxjs/operators";
-import { IDirector } from "../directors.model";
+import { map, mergeMap, takeUntil } from "rxjs/operators";
+import { IDirector } from 'src/interface';
 
 @Component({
     selector: 'app-directors-page',

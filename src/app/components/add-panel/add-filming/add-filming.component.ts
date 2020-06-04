@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorsService } from 'src/app/directors/services/directors.service';
-import { IDirector } from 'src/app/directors/directors.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel.service';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { IDirector } from 'src/interface';
 
 @Component({
   selector: 'app-add-filming',

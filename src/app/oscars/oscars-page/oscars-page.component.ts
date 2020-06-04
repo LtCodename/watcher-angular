@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { OscarsService } from '../services/oscars.service';
 import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
-import { IOscarYear } from '../oscars.model';
+import { IOscarYear } from 'src/interface';
 
 @Component({
   selector: 'app-oscars-page',

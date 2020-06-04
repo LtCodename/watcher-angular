@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITheaterMovie } from '../theaters-page/theaters-page.component';
+import { ITheaterMovie } from 'src/interface';
 
 @Component({
   selector: 'app-theaters-month',

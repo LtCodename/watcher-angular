@@ -1,10 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { IMovie } from '../directors.model';
 import { DirectorsService } from "../services/directors.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { IMovie } from 'src/interface';
 
 @Component({
   selector: 'app-director',

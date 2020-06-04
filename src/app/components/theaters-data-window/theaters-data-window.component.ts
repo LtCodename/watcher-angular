@@ -1,13 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-interface ITheatersWindowInterface {
-  changeTheatersDataCallback(year: number, name: string, month: number): void;
-  oldYear: number;
-  oldName: string;
-  oldMonth: number;
-}
+import { ITheatersWindow} from 'src/interface';
 
 @Component({
   selector: 'app-theaters-data-window',
@@ -71,7 +65,7 @@ export class TheatersDataWindowComponent implements OnInit {
     }
   ]
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindowInterface, private message: MatSnackBar) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindow, private message: MatSnackBar) { }
 
   changeMovieInTheaters(): void {
     if (!this.watchYear) {

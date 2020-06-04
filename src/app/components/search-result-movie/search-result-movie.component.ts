@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DirectorsService } from 'src/app/directors/services/directors.service';
-import { IDirector, IMovie, IYear } from 'src/app/directors/directors.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel/add-panel.service';
 import { OscarsService } from 'src/app/oscars/services/oscars.service';
-import { IOscarMovie } from 'src/app/oscars/oscars.model';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { IDirector, IMovie, IOscarMovie, IOscarYear } from 'src/interface';
 
 @Component({
   selector: 'app-search-result-movie',
@@ -21,7 +20,7 @@ export class SearchResultMovieComponent implements OnInit {
 
   directorName: string = "";
   directors: IDirector[];
-  years: IYear[];
+  years: IOscarYear[];
   directorsSelectValue: string = "";
   yearSelectValue: string = "";
   bestSelectValue: boolean = false;
@@ -90,7 +89,7 @@ export class SearchResultMovieComponent implements OnInit {
       this.directors = data;
     })
 
-    this.osrcarsService.oscarYears$.subscribe((data: IYear[]) => {
+    this.osrcarsService.oscarYears$.subscribe((data: IOscarYear[]) => {
       this.years = data;
     })
   }

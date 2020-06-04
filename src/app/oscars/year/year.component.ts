@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { IOscarMovie } from '../oscars.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { OscarsService } from '../services/oscars.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { IOscarMovie } from 'src/interface';
 
 @Component({
   selector: 'app-year',
