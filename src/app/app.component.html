@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="nav-bar">
     <div class="row">
-        <button mat-raised-button (click)="opened = !opened" class="sidenav-button">
+        <button *ngIf="currentRoute !== 'Admin Page'" mat-raised-button (click)="opened = !opened" class="sidenav-button">
             <mat-icon *ngIf="!opened" color="warn">menu</mat-icon>
             <mat-icon *ngIf="opened" color="warn">menu_open</mat-icon>
         </button>
