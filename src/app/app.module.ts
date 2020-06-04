@@ -27,6 +27,7 @@ import { AddOscarsComponent } from './components/add-panel/add-oscars/add-oscars
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { TheatersDataWindowComponent } from './components/theaters-data-window/theaters-data-window.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     AddDirectorsComponent,
     SearchResultMovieComponent,
     AddFilmingComponent,
-    AddOscarsComponent
+    AddOscarsComponent,
+    TheatersDataWindowComponent
   ],
   imports: [
     BrowserModule,

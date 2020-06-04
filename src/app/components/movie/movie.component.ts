@@ -6,6 +6,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
 import { ConfirmWindowComponent } from '../confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { TheatersDataWindowComponent } from '../theaters-data-window/theaters-data-window.component';
 
 @Component({
   selector: 'app-movie',
@@ -15,6 +16,7 @@ import { AuthErrorMessage } from 'src/app/app.component';
 export class MovieComponent implements OnInit {
 
   yearChangeDialog: any;
+  theatersChangeDialog: any;
   confirmWindow: any;
 
   @Input() name: string = '';
@@ -25,6 +27,7 @@ export class MovieComponent implements OnInit {
   @Input() director: string = '';
   @Input() directorName: string = '';
   @Input() mode: string = '';
+  @Input() month: number;
   @Input() showWatchedDirectorButton: boolean = false;
   @Input() showWatchedOscarsButton: boolean = false;
   @Input() showWatchedTheatersButton: boolean = false;
@@ -126,6 +129,29 @@ export class MovieComponent implements OnInit {
       oldYear: this.year,
       oldName: this.name
     }});
+  }
+
+  showEditTheatersWindow(): void {
+    this.theatersChangeDialog = this.dialog.open(TheatersDataWindowComponent, {data: {
+      changeTheatersDataCallback: (year: number, name: string, month: number) => this.changeTheatersDataCallback(year, name, month),
+      oldYear: this.year,
+      oldName: this.name,
+      oldMonth: this.month
+    }});
+  }
+
+  changeTheatersDataCallback(newYear: number, newName: string, newMonth: number): void {
+    this.directorsService.updateDataInTheaters(this.id, newYear, newName, newMonth).then(response => {
+      this.theatersChangeDialog.close();
+      this.showMessage('Information was updated!');
+    }).catch(error => {
+      this.theatersChangeDialog.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
+    })
   }
 
   getMovieData(): void {

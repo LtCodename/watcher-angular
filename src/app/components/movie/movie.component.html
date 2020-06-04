@@ -148,6 +148,15 @@
                 color="warn">
             <mat-icon>favorite</mat-icon>
         </button>
+        <button
+                *ngIf="showWatchedTheatersButton"
+                mat-icon-button
+                matTooltip="Edit information"
+                matTooltipShowDelay="500"
+                (click)="showEditTheatersWindow()"
+                color="primary">
+            <mat-icon>create</mat-icon>
+        </button>
         <!--General buttons-->
         <button
                 *ngIf="showInfoButton"

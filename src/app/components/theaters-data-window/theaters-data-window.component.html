@@ -1,0 +1,19 @@
+<div class="column">
+    <mat-form-field floatLabel="auto">
+        <mat-label>Movie Name</mat-label>
+        <input matInput required [(ngModel)]="movieName"/>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
+        <mat-label>The year I've watched it</mat-label>
+        <input matInput required [(ngModel)]="watchYear"/>
+    </mat-form-field>
+    <mat-form-field floatLabel="auto">
+        <mat-label>The month I've watched it</mat-label>
+        <mat-select [(value)]="monthSelectValue">
+            <mat-option *ngFor="let month of months" [value]="month.id">
+                {{month.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="changeMovieInTheaters()">Sumbit</button>
+</div>

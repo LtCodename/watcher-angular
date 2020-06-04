@@ -43,6 +43,10 @@ export class DirectorsService {
         return this.firestore.collection('filming').doc(id).update({ year, name });
     }
 
+    updateDataInTheaters(id: string, year: number, name: string, month: number) {
+        return this.firestore.collection('theaters').doc(id).update({ year, name, month });
+    }
+
     toggleMovieWatchedStatus(id: string, watched: boolean) {
         return this.firestore.collection('movies').doc(id).update({ watched });
     }
