@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITheaterMovie } from 'src/interface';
+import { ITheaterMovie, MonthsNames } from 'src/interface';
 
 @Component({
   selector: 'app-theaters-month',
@@ -11,20 +11,7 @@ export class TheatersMonthComponent implements OnInit {
   @Input() name: string = "";
   @Input() movies: ITheaterMovie[] = [];
 
-  names = {
-    1: 'January',
-    2: 'February',
-    3: "March",
-    4: "April",
-    5: "May",
-    6: "June",
-    7: "July",
-    8:  "August",
-    9: "September",
-    10: "October",
-    11: "November",
-    12: "December"
-  }
+  names = MonthsNames;
 
   constructor() { }
 

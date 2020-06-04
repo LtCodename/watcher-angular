@@ -123,3 +123,69 @@ export interface imdbMovie {
     imdbRating: string;
     imdbVotes: string;
 }
+
+export const Months = [
+    {
+        name: 'January',
+        id: 1
+    },
+    {
+        name: 'February',
+        id: 2
+    },
+    {
+        name: 'March',
+        id: 3
+    },
+    {
+        name: 'April',
+        id: 4
+    },
+    {
+        name: 'May',
+        id: 5
+    },
+    {
+        name: 'June',
+        id: 6
+    },
+    {
+        name: 'July',
+        id: 7
+    },
+    {
+        name: 'August',
+        id: 8
+    },
+    {
+        name: 'September',
+        id: 9
+    },
+    {
+        name: 'October',
+        id: 10
+    },
+    {
+        name: 'November',
+        id: 11
+    },
+    {
+        name: 'December',
+        id: 12
+    }
+]
+
+export const MonthsNames = {
+    1: 'January',
+    2: 'February',
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8:  "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+  }
