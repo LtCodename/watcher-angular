@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorsService } from 'src/app/directors/services/directors.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IDirector } from 'src/interface';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-add-filming',
@@ -19,7 +19,7 @@ export class AddFilmingComponent implements OnInit {
 
   constructor(
       private directorsService: DirectorsService, 
-      private serverMessage: MatSnackBar, 
+      private alertService: AlertService, 
       private addService: AddPanelService
     ) { 
     this.directorsService.directors$.subscribe((data: IDirector[]) => {
@@ -29,17 +29,17 @@ export class AddFilmingComponent implements OnInit {
 
   add(): void {
     if (!this.movieName.length) {
-      this.showMessage("Enter movie name!");
+      this.alertService.showAlert("Enter movie name!");
       return;
     }
 
     if (!this.movieYear) {
-      this.showMessage("Enter movie release year!");
+      this.alertService.showAlert("Enter movie release year!");
       return;
     }
 
     if (!this.directorsSelectValue.length) {
-      this.showMessage("Select director for a movie!");
+      this.alertService.showAlert("Select director for a movie!");
       return;
     }
 
@@ -47,23 +47,16 @@ export class AddFilmingComponent implements OnInit {
       this.movieName = "";
       this.movieYear = "";
       this.directorsSelectValue = "";
-      this.showMessage("New movie added!");
+      this.alertService.showAlert("New movie added!");
     }).catch((error) => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
 
   ngOnInit(): void {
-  }
-
-  showMessage(msg: string, time: number = 3000): void {
-    this.serverMessage.open(msg, 'Dismiss', {
-      duration: time,
-      horizontalPosition: "right"
-    });
   }
 }

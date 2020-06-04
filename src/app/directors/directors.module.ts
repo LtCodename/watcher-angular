@@ -7,7 +7,6 @@ import { DirectorComponent } from './director/director.component';
 import { MatButtonModule } from "@angular/material/button";
 import { MovieModule } from "../components/movie/movie.module";
 import { MatCardModule } from "@angular/material/card";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -20,7 +19,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatCardModule,
-    MatSnackBarModule,
     MovieModule,
     MatProgressBarModule,
     MatIconModule,

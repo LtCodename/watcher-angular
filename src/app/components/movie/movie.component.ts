@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DirectorsService } from "../../directors/services/directors.service";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
 import { ConfirmWindowComponent } from '../confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { TheatersDataWindowComponent } from '../theaters-data-window/theaters-data-window.component';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-movie',
@@ -42,7 +42,7 @@ export class MovieComponent implements OnInit {
   constructor(
       private directorsService: DirectorsService,
       public dialog: MatDialog,
-      private serverMessage: MatSnackBar,
+      private alertService: AlertService,
   ) { }
 
 
@@ -56,36 +56,36 @@ export class MovieComponent implements OnInit {
 
   toggleWatchedOscars(): void {
     this.directorsService.toggleWatchedOscars(this.id, !this.watched).then(response => {
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
 
   toggleWatchedTheaters(): void {
     this.directorsService.toggleWatchedTheaters(this.id, !this.watched).then(response => {
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
 
   toggleFavoritesTheaters(): void {
     this.directorsService.toggleFavoritesTheaters(this.id, !this.bookmarked).then(response => {
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -99,13 +99,13 @@ export class MovieComponent implements OnInit {
   markAsReleased(): void {
     this.directorsService.releaseMovie(this.name, this.year, this.director, this.id).subscribe((data) => {
       this.confirmWindow.close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }, (error) => {
       this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -113,13 +113,13 @@ export class MovieComponent implements OnInit {
   changeDataCallback(newYear: number, newName: string): void {
     this.directorsService.updateYearInFilming(this.id, newYear, newName).then(response => {
       this.yearChangeDialog.close();
-      this.showMessage('Release year was updated!');
+      this.alertService.showAlert('Release year was updated!');
     }).catch(error => {
       this.yearChangeDialog.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -144,13 +144,13 @@ export class MovieComponent implements OnInit {
   changeTheatersDataCallback(newYear: number, newName: string, newMonth: number): void {
     this.directorsService.updateDataInTheaters(this.id, newYear, newName, newMonth).then(response => {
       this.theatersChangeDialog.close();
-      this.showMessage('Information was updated!');
+      this.alertService.showAlert('Information was updated!');
     }).catch(error => {
       this.theatersChangeDialog.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -163,7 +163,7 @@ export class MovieComponent implements OnInit {
 
     this.directorsService.getMovieDataFromIMDBApi(this.name, yearForDb).subscribe(response => {
       if (response['Error']) {
-        this.showMessage('Movie not found, update release year!');
+        this.alertService.showAlert('Movie not found, update release year!');
         return;
       }
 
@@ -200,13 +200,13 @@ export class MovieComponent implements OnInit {
   removeMovieFromOscars(id: string): void {
     this.directorsService.removeMovieFromOscars(id).then((data) => {
       this.confirmWindow.close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -214,13 +214,13 @@ export class MovieComponent implements OnInit {
   removeMovieFromTheatres(id: string): void {
     this.directorsService.removeMovieFromTheatres(id).then((data) => {
       this.confirmWindow.close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -228,13 +228,13 @@ export class MovieComponent implements OnInit {
   removeMovieFromDirectors(id: string): void {
     this.directorsService.removeMovieFromDirectors(id).then((data) => {
       this.confirmWindow.close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -242,22 +242,15 @@ export class MovieComponent implements OnInit {
   removeMovieFromFilming(id: string): void {
     this.directorsService.removeMovieFromFilming(id).then((data) => {
       this.confirmWindow.close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
-  }
-
-  showMessage(msg: string, time: number = 3000): void {
-    this.serverMessage.open(msg, 'Dismiss', {
-      duration: time,
-      horizontalPosition: "right"
-    });
   }
 
   ngOnInit(): void {

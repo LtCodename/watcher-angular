@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DirectorsService } from 'src/app/directors/services/directors.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel/add-panel.service';
 import { OscarsService } from 'src/app/oscars/services/oscars.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IDirector, IMovie, IOscarMovie, IOscarYear, imdbMovie, Months } from 'src/interface';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-search-result-movie',
@@ -31,7 +31,7 @@ export class SearchResultMovieComponent implements OnInit {
   constructor(
       private directorsService: DirectorsService, 
       private osrcarsService: OscarsService, 
-      private serverMessage: MatSnackBar,
+      private alertService: AlertService,
       private addPanelService: AddPanelService
     ) {
 
@@ -54,7 +54,7 @@ export class SearchResultMovieComponent implements OnInit {
   addMovie(): void {
     if(this.mode === 'directors') {
       if(!this.directorsSelectValue.length) {
-        this.showMessage('You need to select a director!');
+        this.alertService.showAlert('You need to select a director!');
         return;
       }
   
@@ -66,22 +66,22 @@ export class SearchResultMovieComponent implements OnInit {
       }
   
       if (foundMovie) {
-        this.showMessage('Movie is already exists!');
+        this.alertService.showAlert('Movie is already exists!');
         return;
       }
   
       this.addPanelService.addNewMovie(this.directorsSelectValue, this.name, parseInt(this.year)).then(r => {
-        this.showMessage('Updated successfully!');
+        this.alertService.showAlert('Updated successfully!');
       }).catch((error) => {
         if (error.message && error.message === "Missing or insufficient permissions.") {
-          this.showMessage(AuthErrorMessage, 7000);
+          this.alertService.showAlert(AuthErrorMessage, 7000);
         } else {
-          this.showMessage("Error!");
+          this.alertService.showAlert("Error!");
         }
       })
     } else if (this.mode === 'oscars') {
       if(!this.yearSelectValue.length) {
-        this.showMessage('You need to select a year!');
+        this.alertService.showAlert('You need to select a year!');
         return;
       }
 
@@ -93,27 +93,27 @@ export class SearchResultMovieComponent implements OnInit {
       }
   
       if (foundMovie) {
-        this.showMessage('Movie is already exists!');
+        this.alertService.showAlert('Movie is already exists!');
         return;
       }
       
       this.addPanelService.addNewOscarsMovie(this.yearSelectValue, this.name, this.bestSelectValue).then(r => {
-        this.showMessage('Updated successfully!');
+        this.alertService.showAlert('Updated successfully!');
       }).catch(error => {
         if (error.message && error.message === "Missing or insufficient permissions.") {
-          this.showMessage(AuthErrorMessage, 7000);
+          this.alertService.showAlert(AuthErrorMessage, 7000);
         } else {
-          this.showMessage("Error!");
+          this.alertService.showAlert("Error!");
         }
       })
     } else {
       if(!this.yearWatchedSelectedValue) {
-        this.showMessage('You need to select a year!');
+        this.alertService.showAlert('You need to select a year!');
         return;
       }
 
       if(!this.monthWatchedSelectedValue) {
-        this.showMessage('You need to select a month!');
+        this.alertService.showAlert('You need to select a month!');
         return;
       }
 
@@ -124,22 +124,15 @@ export class SearchResultMovieComponent implements OnInit {
         parseInt(this.year), 
         this.yearWatchedSelectedValue, 
         this.monthWatchedSelectedValue).then(r => {
-        this.showMessage('Updated successfully!');
+          this.alertService.showAlert('Updated successfully!');
       }).catch(error => {
         if (error.message && error.message === "Missing or insufficient permissions.") {
-          this.showMessage(AuthErrorMessage, 7000);
+          this.alertService.showAlert(AuthErrorMessage, 7000);
         } else {
-          this.showMessage("Error!");
+          this.alertService.showAlert("Error!");
         }
       })
     }
-  }
-
-  showMessage(msg: string, time: number = 3000): void {
-    this.serverMessage.open(msg, 'Dismiss', {
-      duration: time,
-      horizontalPosition: "right"
-    });
   }
 
   ngOnInit(): void {

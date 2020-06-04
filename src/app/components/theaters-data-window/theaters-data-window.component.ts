@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ITheatersWindow, Months} from 'src/interface';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-theaters-data-window',
@@ -15,27 +15,20 @@ export class TheatersDataWindowComponent implements OnInit {
   monthSelectValue: number = this.data.oldMonth;
   months = Months;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindow, private message: MatSnackBar) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindow, private alertService: AlertService) { }
 
   changeMovieInTheaters(): void {
     if (!this.watchYear) {
-      this.showMessage('Please enter a valid year!');
+      this.alertService.showAlert('Please enter a valid year!');
       return;
     }
 
     if (!this.movieName.length) {
-      this.showMessage('Please enter name for this movie!');
+      this.alertService.showAlert('Please enter name for this movie!');
       return;
     }
 
     this.data.changeTheatersDataCallback(this.watchYear, this.movieName, this.monthSelectValue);
-  }
-
-  showMessage(mssg: string): void {
-    this.message.open(mssg, 'Dismiss', {
-      duration: 3000,
-      horizontalPosition: "right"
-    });
   }
 
   ngOnInit(): void {

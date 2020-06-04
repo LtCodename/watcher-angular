@@ -1,10 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DirectorsService } from "../services/directors.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IMovie } from 'src/interface';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-director',
@@ -22,7 +22,7 @@ export class DirectorComponent implements OnInit, OnChanges {
 
   constructor(
     private directorsService: DirectorsService, 
-    private serverMessage: MatSnackBar,
+    private alertService: AlertService,
     private dialog: MatDialog
     ) { }
 
@@ -52,13 +52,13 @@ export class DirectorComponent implements OnInit, OnChanges {
   removeDirector(id: string):void {
     this.directorsService.deleteDirector(id).then(r => {
       this.confirmWindow .close();
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow .close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
@@ -71,32 +71,25 @@ export class DirectorComponent implements OnInit, OnChanges {
 
   toggleFavoritesDirectors(id: string, bookmarked: boolean):void {
     this.directorsService.toggleBookmarkMovie(id, bookmarked).then(r => {
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
   }
 
   toggleWatchedDirectors(id: string, watched: boolean):void {
     this.directorsService.toggleMovieWatchedStatus(id, watched).then(r => {
-      this.showMessage('Updated successfully!');
+      this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.showMessage(AuthErrorMessage, 7000);
+        this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {
-        this.showMessage("Error!");
+        this.alertService.showAlert("Error!");
       }
     })
-  }
-
-  showMessage(msg: string, time: number = 3000): void {
-    this.serverMessage.open(msg, 'Dismiss', {
-      duration: time,
-      horizontalPosition: "right"
-    });
   }
 }
