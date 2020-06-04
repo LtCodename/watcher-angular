@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddPanelService } from '../add-panel/add-panel.service';
 import { OscarsService } from 'src/app/oscars/services/oscars.service';
 import { AuthErrorMessage } from 'src/app/app.component';
-import { IDirector, IMovie, IOscarMovie, IOscarYear } from 'src/interface';
+import { IDirector, IMovie, IOscarMovie, IOscarYear, imdbMovie } from 'src/interface';
 
 @Component({
   selector: 'app-search-result-movie',
@@ -96,7 +96,7 @@ export class SearchResultMovieComponent implements OnInit {
 
   getMovieData(): void {
     let yearNumber: number = parseInt(this.year);
-    this.directorsService.getMovieDataFromIMDBApi(this.name, yearNumber).subscribe((data: any) => {
+    this.directorsService.getMovieDataFromIMDBApi(this.name, yearNumber).subscribe((data: imdbMovie[]) => {
       this.directorName = data['Director'];
     })
   }

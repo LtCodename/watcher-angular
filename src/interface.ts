@@ -20,7 +20,7 @@ export interface IMovie {
 
 export interface IChangeYearWindow {
     changeDataCallback(year: number, name: string): void;
-    oldYear: any;
+    oldYear: number;
     oldName: string;
 }
 
@@ -65,4 +65,61 @@ export interface ITheaterMovie {
     releaseYear?: number;
     watched: boolean;
     year: number;
+}
+
+export interface ITheaterMonth {
+    monthName: string;
+    mocies: ITheaterMovie[]
+}
+
+export interface ITheaterYear {
+    yearName: string;
+    months: ITheaterMonth[]
+}
+
+/* General */
+
+export interface ISearchResuls {
+    Poster: string;
+    Title: string;
+    Type: string;
+    Year: string;
+    imdbID: string;
+}
+
+export interface IConfirmWindow {
+    confirm(id?: string): void;
+}
+
+export interface imdbMovieRating {
+    Source: string;
+    Value: string;
+}
+
+export interface imdbMovie {
+    Actors: string;
+    Awards: string;
+    BoxOffice: string;
+    Country: string;
+    DVD: string;
+    Director: string;
+    Genre: string;
+    Language: string;
+    Metascore: string;
+    Plot: string;
+    Poster: string;
+    Production: string;
+    Rated: string;
+    Ratings: imdbMovieRating[];
+    Released: string;
+    Response: string;
+    Runtime: "130 min"
+    Title: string;
+    Type: string;
+    Website: string;
+    Writer: string;
+    Year: string;
+    imdbID: string;
+    imdbRating: string;
+    imdbVotes: string;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TheatersService } from '../services/theaters.service';
-import { ITheaterMovie } from 'src/interface';
+import { ITheaterMovie, ITheaterYear } from 'src/interface';
 
 @Component({
   selector: 'app-theaters-page',
@@ -10,7 +10,7 @@ import { ITheaterMovie } from 'src/interface';
 
 export class TheatersPageComponent implements OnInit {
 
-  years: any = [];
+  years: ITheaterYear[] = [];
   showSpinner = true;
   
   constructor(private theaterService: TheatersService) { 

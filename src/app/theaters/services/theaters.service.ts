@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { ITheaterMovie } from 'src/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class TheatersService {
       id: e.payload.doc.id,
       // @ts-ignore
       ...e.payload.doc.data()
-    })).sort((a:any, b: any) => {
+    })).sort((a: ITheaterMovie, b: ITheaterMovie) => {
       if (a.name < b.name) {
         return -1;
       }

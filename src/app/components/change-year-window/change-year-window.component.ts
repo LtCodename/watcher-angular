@@ -11,20 +11,15 @@ import { IChangeYearWindow } from 'src/interface';
 })
 export class ChangeYearWindowComponent implements OnInit {
 
-  releaseYear: any = this.data.oldYear;
+  releaseYear: number = this.data.oldYear;
   movieName: string = this.data.oldName;
 
   constructor(private message: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: IChangeYearWindow) { }
 
   sumbitNewReleaseYear(): void {
-    let year: number = parseInt(this.releaseYear);
+    let year: number = this.releaseYear;
     if (isNaN(year)) {
       this.showMessage('Please enter a number!');
-      return;
-    }
-
-    if (this.releaseYear.length > 4) {
-      this.showMessage('Please enter a valid year!');
       return;
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddPanelService } from '../add-panel.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { ISearchResuls } from 'src/interface';
 
 @Component({
   selector: 'app-add-oscars',
@@ -12,7 +13,7 @@ export class AddOscarsComponent implements OnInit {
 
   year: string = "";
   movieName: string = "";
-  searchResults: any = [];
+  searchResults: ISearchResuls[] = [];
 
   constructor(private addService: AddPanelService, private serverMessage: MatSnackBar) { }
 
@@ -38,7 +39,7 @@ export class AddOscarsComponent implements OnInit {
   }
 
   search(): void {
-    this.addService.searchApi(this.movieName).subscribe((res: any) => {
+    this.addService.searchApi(this.movieName).subscribe((res: ISearchResuls) => {
       if (res['Response'] === 'False') {
         this.showMessage("No result for this search!");
       }

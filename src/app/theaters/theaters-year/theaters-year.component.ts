@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ITheaterMonth } from 'src/interface';
 
 @Component({
   selector: 'app-theaters-year',
@@ -7,9 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TheatersYearComponent implements OnInit {
 
-  @Input() monthsData: any;
+  @Input() monthsData: ITheaterMonth[];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }

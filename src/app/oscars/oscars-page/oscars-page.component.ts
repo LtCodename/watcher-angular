@@ -26,7 +26,7 @@ export class OscarsPageComponent implements OnInit, OnChanges {
           year.movies = movieData.filter(movie => movie.year === year.id)
         })
 
-        this.years = yearsData.sort((a: any, b: any) => {
+        this.years = yearsData.sort((a: IOscarYear, b: IOscarYear) => {
           if (a.name < b.name) {
             return 1;
           }
@@ -44,7 +44,7 @@ export class OscarsPageComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.years) {
-      this.years = this.years.sort((a: any, b: any) => {
+      this.years = this.years.sort((a: IOscarYear, b: IOscarYear) => {
         if (a.name < b.name) {
           return 1;
         }

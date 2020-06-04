@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddPanelService } from '../add-panel.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ISearchResuls } from 'src/interface';
 
 @Component({
   selector: 'app-add-theaters',
@@ -10,12 +11,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddTheatersComponent implements OnInit {
 
   movieSearchName:string = "";
-  searchResults: any = [];
+  searchResults: ISearchResuls[] = [];
 
   constructor(private addService: AddPanelService, private serverMessage: MatSnackBar) { }
 
   search(): void {
-    this.addService.searchApi(this.movieSearchName).subscribe((res: any) => {
+    this.addService.searchApi(this.movieSearchName).subscribe((res: ISearchResuls) => {
       if (res['Response'] === 'False') {
         this.showMessage("No result for this search!");
       }

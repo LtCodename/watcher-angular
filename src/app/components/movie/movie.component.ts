@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DirectorsService } from "../../directors/services/directors.service";
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
@@ -15,9 +15,9 @@ import { TheatersDataWindowComponent } from '../theaters-data-window/theaters-da
 })
 export class MovieComponent implements OnInit {
 
-  yearChangeDialog: any;
-  theatersChangeDialog: any;
-  confirmWindow: any;
+  yearChangeDialog: MatDialogRef<any>;
+  theatersChangeDialog: MatDialogRef<any>;
+  confirmWindow: MatDialogRef<any>;
 
   @Input() name: string = '';
   @Input() year: number;

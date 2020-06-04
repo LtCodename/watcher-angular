@@ -13,7 +13,7 @@ import { IDirector } from 'src/interface';
 export class AddFilmingComponent implements OnInit {
 
   movieName: string = "";
-  movieYear: any;
+  movieYear: string = "";
   directors: IDirector[];
   directorsSelectValue: string = "";
 
@@ -43,7 +43,7 @@ export class AddFilmingComponent implements OnInit {
       return;
     }
 
-    this.addService.addNewFilmingMovie(this.directorsSelectValue, this.movieName, this.movieYear).then(() => {
+    this.addService.addNewFilmingMovie(this.directorsSelectValue, this.movieName, parseInt(this.movieYear)).then(() => {
       this.movieName = "";
       this.movieYear = "";
       this.directorsSelectValue = "";

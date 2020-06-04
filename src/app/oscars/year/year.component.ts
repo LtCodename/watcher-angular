@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { OscarsService } from '../services/oscars.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,12 +14,12 @@ import { IOscarMovie } from 'src/interface';
 export class YearComponent implements OnInit, OnChanges {
   @Input() name: string;
   @Input() id: string;
-  @Input() movies: any;
+  @Input() movies: IOscarMovie[];
   percentage: number = 0;
   bestPictureName: string = "";
   showYearsMovies: boolean = false;
   bestMovieSeen: boolean = false;
-  confirmWindow: any;
+  confirmWindow: MatDialogRef<any>;
 
   constructor(
     private dialog: MatDialog, 

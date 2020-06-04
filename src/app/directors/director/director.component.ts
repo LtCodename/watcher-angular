@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DirectorsService } from "../services/directors.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IMovie } from 'src/interface';
@@ -14,7 +14,7 @@ import { IMovie } from 'src/interface';
 export class DirectorComponent implements OnInit, OnChanges {
   showMovies: boolean = false;
   percentage: number = 0;
-  confirmWindow: any;
+  confirmWindow: MatDialogRef<any>;
 
   @Input() name: string;
   @Input() id: string;
@@ -31,7 +31,7 @@ export class DirectorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.movies) {
-      this.movies = this.movies.sort((a: any, b: any) => {
+      this.movies = this.movies.sort((a: IMovie, b: IMovie) => {
         return a.year - b.year;
       })
     }
