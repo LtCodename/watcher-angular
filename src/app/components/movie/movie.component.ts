@@ -74,6 +74,18 @@ export class MovieComponent implements OnInit {
     })
   }
 
+  toggleFavoritesTheaters(): void {
+    this.directorsService.toggleFavoritesTheaters(this.id, !this.bookmarked).then(response => {
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
+    })
+  }
+
   cofirmMovieRelease(): void {
     this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
       confirm: () => this.markAsReleased()

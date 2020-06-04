@@ -52,10 +52,6 @@ export class TheatersPageComponent implements OnInit {
         this.years.push(yearBlueprint);
         this.showSpinner = false;
       });
-
-      //console.log(this.years);
-
-      //console.log(moviesByYear);
     }, () => {
       this.showSpinner = false;
     })

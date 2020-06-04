@@ -130,6 +130,24 @@
                 color="primary">
             <mat-icon>check_circle_outline</mat-icon>
         </button>
+        <button
+                *ngIf="showWatchedTheatersButton && !bookmarked && !watched"
+                (click)="toggleFavoritesTheaters()"
+                mat-icon-button
+                matTooltip="Add to watchlist"
+                matTooltipShowDelay="500"
+                color="warn">
+            <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button
+                *ngIf="showWatchedTheatersButton && bookmarked && !watched"
+                (click)="toggleFavoritesTheaters()"
+                mat-icon-button
+                matTooltip="Remove from watchlist"
+                matTooltipShowDelay="500"
+                color="warn">
+            <mat-icon>favorite</mat-icon>
+        </button>
         <!--General buttons-->
         <button
                 *ngIf="showInfoButton"
