@@ -3,8 +3,9 @@ import { DirectorsService } from 'src/app/directors/services/directors.service';
 import { AddPanelService } from '../add-panel/add-panel.service';
 import { OscarsService } from 'src/app/oscars/services/oscars.service';
 import { AuthErrorMessage } from 'src/app/app.component';
-import { IDirector, IMovie, IOscarMovie, IOscarYear, imdbMovie, Months } from 'src/interface';
+import { IDirector, IMovie, IOscarMovie, IOscarYear, imdbMovie, Months, ITheaterMovie } from 'src/interface';
 import { AlertService } from 'src/alert.service';
+import { TheatersService } from 'src/app/theaters/services/theaters.service';
 
 @Component({
   selector: 'app-search-result-movie',
@@ -27,12 +28,14 @@ export class SearchResultMovieComponent implements OnInit {
   yearWatchedSelectedValue: number;
   monthWatchedSelectedValue: number;
   months = Months;
+  theatersMovies: ITheaterMovie[] = [];
 
   constructor(
       private directorsService: DirectorsService, 
       private osrcarsService: OscarsService, 
       private alertService: AlertService,
-      private addPanelService: AddPanelService
+      private addPanelService: AddPanelService,
+      private theatersService: TheatersService
     ) {
 
     this.directorsService.directors$.subscribe((data: IDirector[]) => {
@@ -41,6 +44,10 @@ export class SearchResultMovieComponent implements OnInit {
 
     this.osrcarsService.oscarYears$.subscribe((data: IOscarYear[]) => {
       this.years = data;
+    })
+
+    this.theatersService.movies$.subscribe((data: ITheaterMovie[]) => {
+      this.theatersMovies = data;
     })
   }
 
@@ -117,7 +124,13 @@ export class SearchResultMovieComponent implements OnInit {
         return;
       }
 
-      //TODO checl movie for duplicates
+      let foundMovie: ITheaterMovie = null;
+      foundMovie = this.theatersMovies.find(elem => elem.name === this.name);
+  
+      if (foundMovie) {
+        this.alertService.showAlert('Movie is already exists!');
+        return;
+      }
       
       this.addPanelService.addNewTheatersMovie(
         this.name, 
