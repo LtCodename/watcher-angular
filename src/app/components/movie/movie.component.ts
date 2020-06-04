@@ -191,8 +191,28 @@ export class MovieComponent implements OnInit {
     }});
   }
 
+  confirmRemoveFromTheaters(): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: (id: string) => this.removeMovieFromTheatres(this.id)
+    }});
+  }
+
   removeMovieFromOscars(id: string): void {
     this.directorsService.removeMovieFromOscars(id).then((data) => {
+      this.confirmWindow.close();
+      this.showMessage('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.showMessage(AuthErrorMessage, 7000);
+      } else {
+        this.showMessage("Error!");
+      }
+    })
+  }
+
+  removeMovieFromTheatres(id: string): void {
+    this.directorsService.removeMovieFromTheatres(id).then((data) => {
       this.confirmWindow.close();
       this.showMessage('Updated successfully!');
     }).catch(error => {

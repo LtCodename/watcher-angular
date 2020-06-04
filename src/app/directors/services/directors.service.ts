@@ -83,6 +83,10 @@ export class DirectorsService {
         return this.firestore.collection('oscarMovies').doc(id).delete();
     }
 
+    removeMovieFromTheatres(id: string) {
+        return this.firestore.collection('theaters').doc(id).delete();
+    }
+
     removeMovieFromFilming(id: string) {
         return this.firestore.collection('filming').doc(id).delete();
     }
