@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface ITheatersWindowInterface {
   changeTheatersDataCallback(year: number, name: string, month: number): void;
@@ -69,10 +70,27 @@ export class TheatersDataWindowComponent implements OnInit {
     }
   ]
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindowInterface) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindowInterface, private message: MatSnackBar) { }
 
   changeMovieInTheaters(): void {
-    console.log('changing data...')
+    if (!this.watchYear) {
+      this.showMessage('Please enter a valid year!');
+      return;
+    }
+
+    if (!this.movieName.length) {
+      this.showMessage('Please enter name for this movie!');
+      return;
+    }
+
+    this.data.changeTheatersDataCallback(this.watchYear, this.movieName, this.monthSelectValue);
+  }
+
+  showMessage(mssg: string): void {
+    this.message.open(mssg, 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "right"
+    });
   }
 
   ngOnInit(): void {
