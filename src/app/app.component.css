@@ -2,7 +2,6 @@
     min-height: calc(100% - 64px);
 }
 
-
 .nav-link {
     padding: 0 5px;
     margin-right: 1rem;
@@ -31,4 +30,10 @@
 
 .add-panel-content {
     padding: 10px;
+}
+
+@media (max-width: 780px) {
+    .page-title-wrapper {
+        display: none;
+    }
 }
