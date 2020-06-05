@@ -36,7 +36,7 @@ export class MovieComponent implements OnInit {
   @Input() showReleasedButton: boolean = false;
   @Input() releasedYear: number;
 
-  @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
+  @Output() toggleFavoritesMovie: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedMovie: EventEmitter<void> = new EventEmitter();
 
   constructor(
@@ -47,23 +47,11 @@ export class MovieComponent implements OnInit {
 
 
   toggleFavorites(): void {
-    this.toggleFavoritesDirectors.emit();
+    this.toggleFavoritesMovie.emit();
   }
 
   toggleWatched(): void {
     this.toggleWatchedMovie.emit();
-  }
-
-  toggleFavoritesTheaters(): void {
-    this.directorsService.toggleFavoritesTheaters(this.id, !this.bookmarked).then(response => {
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
   }
 
   changeDataCallback(newYear: number, newName: string): void {

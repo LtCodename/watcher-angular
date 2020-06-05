@@ -7,11 +7,12 @@
         [watched]="movie.watched"
         [bookmarked]="movie.priority"
         [showInfoButton]="true"
-        [showWatchedTheatersButton]="true"
+        [showBookmarkButton]="true"
         [month]="movie.month"
         [year]="movie.year"
         [releasedYear]="movie.releasedYear"
         (toggleWatchedMovie)="toggleWatchedTheaters(movie.id, !movie.watched)"
+        (toggleFavoritesMovie)="toggleFavoritesTheaters(movie.id, !movie.priority)"
         [mode]="'theatersMode'">
     </app-movie>
 </div>

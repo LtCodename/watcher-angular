@@ -9,7 +9,8 @@
     <mat-card-title *ngIf="mode !== 'theatersMode'">{{name}}</mat-card-title>
     <mat-card-content *ngIf="mode === 'theatersMode'">{{name}}</mat-card-content>
     <mat-card-actions align="end">
-        <!--/directors buttons-->
+        <!--/RIGHT WAY-->
+        <!--TOGGLE WATCH-->
         <button
                 *ngIf="!watched"
                 mat-icon-button
@@ -28,6 +29,7 @@
                 color="primary">
             <mat-icon>check_circle</mat-icon>
         </button>
+        <!--TOGGLE FAV-->
         <button
                 *ngIf="showBookmarkButton && !bookmarked && !watched"
                 (click)="toggleFavorites()"
@@ -46,6 +48,8 @@
                 color="warn">
             <mat-icon>favorite</mat-icon>
         </button>
+
+        <!--/directors buttons-->
         <button
                 *ngIf="showBookmarkButton"
                 mat-icon-button
@@ -74,24 +78,6 @@
             <mat-icon>delete</mat-icon>
         </button>
         <!--/oscars buttons-->
-        <!-- <button
-                *ngIf="showWatchedOscarsButton && !watched"
-                mat-icon-button
-                matTooltip="Add to 'Watched'"
-                matTooltipShowDelay="500"
-                (click)="toggleWatchedOscars()"
-                color="primary">
-            <mat-icon>check_circle_outline</mat-icon>
-        </button>
-        <button
-                *ngIf="showWatchedOscarsButton && watched"
-                mat-icon-button
-                matTooltip="Remove from 'Watched'"
-                matTooltipShowDelay="500"
-                (click)="toggleWatchedOscars()"
-                color="primary">
-            <mat-icon>check_circle</mat-icon>
-        </button> -->
         <button
                 *ngIf="showWatchedOscarsButton"
                 mat-icon-button
@@ -102,24 +88,6 @@
             <mat-icon>delete</mat-icon>
         </button>
         <!--Theaters buttons-->
-        <button
-                *ngIf="showWatchedTheatersButton && !bookmarked && !watched"
-                (click)="toggleFavoritesTheaters()"
-                mat-icon-button
-                matTooltip="Add to watchlist"
-                matTooltipShowDelay="500"
-                color="warn">
-            <mat-icon>favorite_border</mat-icon>
-        </button>
-        <button
-                *ngIf="showWatchedTheatersButton && bookmarked && !watched"
-                (click)="toggleFavoritesTheaters()"
-                mat-icon-button
-                matTooltip="Remove from watchlist"
-                matTooltipShowDelay="500"
-                color="warn">
-            <mat-icon>favorite</mat-icon>
-        </button>
         <button
                 *ngIf="showWatchedTheatersButton"
                 mat-icon-button

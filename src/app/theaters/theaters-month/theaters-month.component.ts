@@ -30,6 +30,18 @@ export class TheatersMonthComponent implements OnInit {
     })
   }
 
+  toggleFavoritesTheaters(id: string, bookmarked: boolean): void {
+    this.directorsService.toggleFavoritesTheaters(id, bookmarked).then(response => {
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
   ngOnInit(): void {
   }
 }
