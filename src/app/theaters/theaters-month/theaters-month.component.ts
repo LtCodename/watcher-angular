@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ITheaterMovie, MonthsNames } from 'src/interface';
+import { DirectorsService } from 'src/app/directors/services/directors.service';
+import { AlertService } from 'src/alert.service';
+import { AuthErrorMessage } from 'src/app/app.component';
 
 @Component({
   selector: 'app-theaters-month',
@@ -13,9 +16,20 @@ export class TheatersMonthComponent implements OnInit {
 
   names = MonthsNames;
 
-  constructor() { }
+  constructor(private directorsService: DirectorsService, private alertService: AlertService) { }
+
+  toggleWatchedTheaters(id: string, watched: boolean): void {
+    this.directorsService.toggleWatchedTheaters(id, watched).then(response => {
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
 
   ngOnInit(): void {
   }
-
 }

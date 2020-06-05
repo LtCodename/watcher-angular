@@ -26,6 +26,7 @@
         [showWatchedOscarsButton]="true"
         [watched]="movie.watched"
         [id]="movie.id"
+        (toggleWatchedMovie)="toggleWatchedOscars(movie.id, !movie.watched)"
         [name]="movie.name">
     </app-movie>
 </div>

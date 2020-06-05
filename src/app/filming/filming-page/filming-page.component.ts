@@ -4,6 +4,10 @@ import { Subject } from "rxjs";
 import { map, mergeMap, takeUntil } from "rxjs/operators";
 import { DirectorsService } from 'src/app/directors/services/directors.service';
 import { IDirector, IFilmingMovie } from 'src/interface';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
+import { AuthErrorMessage } from 'src/app/app.component';
+import { AlertService } from 'src/alert.service';
 
 @Component({
   selector: 'app-filming-page',
@@ -14,8 +18,13 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   private notifier = new Subject();
   filming: IFilmingMovie[] = [];
   showSpinner = true;
+  confirmWindow: MatDialogRef<any>;
 
-  constructor(private filmingService: FilmingService, private directorsService: DirectorsService ) {
+  constructor(
+    private filmingService: FilmingService, 
+    private directorsService: DirectorsService,
+    private alertService: AlertService,
+    public dialog: MatDialog, ) {
     this.filmingService.filming$
       .pipe(
           takeUntil(this.notifier),
@@ -31,6 +40,26 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
         this.showSpinner = false;
         // Add some error processing here
     });
+  }
+
+  confirmMovieRelease(name: string, year: number, director: string, id: string): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.markAsReleased(name, year, director, id)
+    }});
+  }
+
+  markAsReleased(name: string, year: number, director: string, id: string): void {
+    this.directorsService.releaseMovie(name, year, director, id).subscribe((data) => {
+      this.confirmWindow.close();
+      this.alertService.showAlert('Updated successfully!');
+    }, (error) => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
   }
 
   ngOnInit(): void {

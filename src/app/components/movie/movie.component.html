@@ -11,7 +11,7 @@
     <mat-card-actions align="end">
         <!--/directors buttons-->
         <button
-                *ngIf="showWatchedDirectorButton && !watched"
+                *ngIf="!watched"
                 mat-icon-button
                 matTooltip="Add to 'Watched'"
                 matTooltipShowDelay="500"
@@ -20,7 +20,7 @@
             <mat-icon>check_circle_outline</mat-icon>
         </button>
         <button
-                *ngIf="showWatchedDirectorButton && watched"
+                *ngIf="watched"
                 mat-icon-button
                 matTooltip="Remove from 'Watched'"
                 matTooltipShowDelay="500"
@@ -55,16 +55,6 @@
                 color="primary">
             <mat-icon>delete</mat-icon>
         </button>
-        <!--/filming buttons-->
-        <button
-                *ngIf="showReleasedButton"
-                mat-icon-button
-                matTooltip="Mark as 'Released'"
-                matTooltipShowDelay="500"
-                (click)="cofirmMovieRelease()"
-                color="primary">
-            <mat-icon>check_circle</mat-icon>
-        </button>
         <button
                 *ngIf="showReleasedButton"
                 mat-icon-button
@@ -84,7 +74,7 @@
             <mat-icon>delete</mat-icon>
         </button>
         <!--/oscars buttons-->
-        <button
+        <!-- <button
                 *ngIf="showWatchedOscarsButton && !watched"
                 mat-icon-button
                 matTooltip="Add to 'Watched'"
@@ -101,7 +91,7 @@
                 (click)="toggleWatchedOscars()"
                 color="primary">
             <mat-icon>check_circle</mat-icon>
-        </button>
+        </button> -->
         <button
                 *ngIf="showWatchedOscarsButton"
                 mat-icon-button
@@ -112,24 +102,6 @@
             <mat-icon>delete</mat-icon>
         </button>
         <!--Theaters buttons-->
-        <button
-                *ngIf="showWatchedTheatersButton && watched"
-                mat-icon-button
-                matTooltip="Remove from 'Watched'"
-                matTooltipShowDelay="500"
-                (click)="toggleWatchedTheaters()"
-                color="primary">
-            <mat-icon>check_circle</mat-icon>
-        </button>
-        <button
-                *ngIf="showWatchedTheatersButton && !watched"
-                mat-icon-button
-                matTooltip="Add to 'Watched'"
-                matTooltipShowDelay="500"
-                (click)="toggleWatchedTheaters()"
-                color="primary">
-            <mat-icon>check_circle_outline</mat-icon>
-        </button>
         <button
                 *ngIf="showWatchedTheatersButton && !bookmarked && !watched"
                 (click)="toggleFavoritesTheaters()"

@@ -37,7 +37,7 @@ export class MovieComponent implements OnInit {
   @Input() releasedYear: number;
 
   @Output() toggleFavoritesDirectors: EventEmitter<void> = new EventEmitter();
-  @Output() toggleWatchedDirectors: EventEmitter<void> = new EventEmitter();
+  @Output() toggleWatchedMovie: EventEmitter<void> = new EventEmitter();
 
   constructor(
       private directorsService: DirectorsService,
@@ -51,57 +51,13 @@ export class MovieComponent implements OnInit {
   }
 
   toggleWatched(): void {
-    this.toggleWatchedDirectors.emit();
-  }
-
-  toggleWatchedOscars(): void {
-    this.directorsService.toggleWatchedOscars(this.id, !this.watched).then(response => {
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  toggleWatchedTheaters(): void {
-    this.directorsService.toggleWatchedTheaters(this.id, !this.watched).then(response => {
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
+    this.toggleWatchedMovie.emit();
   }
 
   toggleFavoritesTheaters(): void {
     this.directorsService.toggleFavoritesTheaters(this.id, !this.bookmarked).then(response => {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  cofirmMovieRelease(): void {
-    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
-      confirm: () => this.markAsReleased()
-    }});
-  }
-
-  markAsReleased(): void {
-    this.directorsService.releaseMovie(this.name, this.year, this.director, this.id).subscribe((data) => {
-      this.confirmWindow.close();
-      this.alertService.showAlert('Updated successfully!');
-    }, (error) => {
-      this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
         this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {

@@ -10,7 +10,8 @@
         [showWatchedTheatersButton]="true"
         [month]="movie.month"
         [year]="movie.year"
-        [releasedYear]="movie.releasedYear" 
+        [releasedYear]="movie.releasedYear"
+        (toggleWatchedMovie)="toggleWatchedTheaters(movie.id, !movie.watched)"
         [mode]="'theatersMode'">
     </app-movie>
 </div>

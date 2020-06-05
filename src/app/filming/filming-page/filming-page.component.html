@@ -11,6 +11,7 @@
                 [id]="filmingMovie.id"
                 [showReleasedButton]="true"
                 [showInfoButton]="true"
+                (toggleWatchedMovie)="confirmMovieRelease(filmingMovie.name, filmingMovie.year, filmingMovie.director, filmingMovie.id)"
                 [mode]="'filmingMode'">
         </app-movie>
     </div>

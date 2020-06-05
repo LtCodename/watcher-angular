@@ -5,6 +5,7 @@ import { OscarsService } from '../services/oscars.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IOscarMovie } from 'src/interface';
 import { AlertService } from 'src/alert.service';
+import { DirectorsService } from 'src/app/directors/services/directors.service';
 
 @Component({
   selector: 'app-year',
@@ -24,7 +25,8 @@ export class YearComponent implements OnInit, OnChanges {
   constructor(
     private dialog: MatDialog, 
     private oscarsService: OscarsService, 
-    private alertService: AlertService
+    private alertService: AlertService,
+    private directorsService: DirectorsService
     ) { }
 
   confirmRemove(): void {
@@ -66,6 +68,18 @@ export class YearComponent implements OnInit, OnChanges {
 
   showMovies(): void {
     this.showYearsMovies = !this.showYearsMovies;
+  }
+
+  toggleWatchedOscars(id: string, watched: boolean): void {
+    this.directorsService.toggleWatchedOscars(id, watched).then(response => {
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
   }
 
   ngOnInit(): void {
