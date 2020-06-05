@@ -5,6 +5,7 @@ import { AlertService } from 'src/alert.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
+import { TheatersDataWindowComponent } from 'src/app/components/theaters-data-window/theaters-data-window.component';
 
 @Component({
   selector: 'app-theaters-month',
@@ -18,6 +19,7 @@ export class TheatersMonthComponent implements OnInit {
 
   names = MonthsNames;
   confirmWindow: MatDialogRef<any>;
+  theatersChangeDialog: MatDialogRef<any>;
 
 
   constructor(
@@ -62,6 +64,30 @@ export class TheatersMonthComponent implements OnInit {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
+  showEditTheatersWindow(oldYear: number, oldName: string, oldMonth: number, id: string): void {
+    this.theatersChangeDialog = this.dialog.open(TheatersDataWindowComponent, {data: {
+      changeTheatersDataCallback: (year: number, name: string, month: number, id: string) => this.changeTheatersDataCallback(year, name, month, id),
+      oldYear: oldYear,
+      oldName: oldName,
+      oldMonth: oldMonth,
+      id
+    }});
+  }
+
+  changeTheatersDataCallback(newYear: number, newName: string, newMonth: number, id: string): void {
+    this.directorsService.updateDataInTheaters(id, newYear, newName, newMonth).then(response => {
+      this.theatersChangeDialog.close();
+      this.alertService.showAlert('Information was updated!');
+    }).catch(error => {
+      this.theatersChangeDialog.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
         this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {

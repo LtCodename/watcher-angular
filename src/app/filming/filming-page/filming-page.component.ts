@@ -8,6 +8,7 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { AlertService } from 'src/alert.service';
+import { ChangeYearWindowComponent } from 'src/app/components/change-year-window/change-year-window.component';
 
 @Component({
   selector: 'app-filming-page',
@@ -19,6 +20,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   filming: IFilmingMovie[] = [];
   showSpinner = true;
   confirmWindow: MatDialogRef<any>;
+  yearChangeDialog: MatDialogRef<any>;
 
   constructor(
     private filmingService: FilmingService, 
@@ -74,6 +76,30 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
+  showEditYearWindow(name: string, year: number, id: string): void {
+    this.yearChangeDialog = this.dialog.open(ChangeYearWindowComponent, {data: {
+      changeDataCallback: (newYear: number, newName: string, id: string) => this.changeDataCallback(newYear, newName, id),
+      oldYear: year,
+      oldName: name,
+      id
+    }});
+  }
+
+  changeDataCallback(newYear: number, newName: string, id: string): void {
+    console.log(newName, newYear)
+    this.directorsService.updateYearInFilming(id, newYear, newName).then(response => {
+      this.yearChangeDialog.close();
+      this.alertService.showAlert('Release year was updated!');
+    }).catch(error => {
+      this.yearChangeDialog.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
         this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {

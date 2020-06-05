@@ -19,9 +19,10 @@ export interface IMovie {
 /* Filming */
 
 export interface IChangeYearWindow {
-    changeDataCallback(year: number, name: string): void;
+    changeDataCallback(year: number, name: string, id: string): void;
     oldYear: number;
     oldName: string;
+    id: string;
 }
 
 export interface IFilmingMovie {
@@ -51,10 +52,11 @@ export interface IOscarYear {
 /* Theaters */
 
 export interface ITheatersWindow {
-    changeTheatersDataCallback(year: number, name: string, month: number): void;
+    changeTheatersDataCallback(year: number, name: string, month: number, id: string): void;
     oldYear: number;
     oldName: string;
     oldMonth: number;
+    id: string;
 }
 
 export interface ITheaterMovie {

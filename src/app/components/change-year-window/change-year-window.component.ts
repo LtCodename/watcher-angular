@@ -13,6 +13,7 @@ export class ChangeYearWindowComponent implements OnInit {
 
   releaseYear: number = this.data.oldYear;
   movieName: string = this.data.oldName;
+  movieId: string = this.data.id;
 
   constructor(private alertService: AlertService, @Inject(MAT_DIALOG_DATA) public data: IChangeYearWindow) { }
 
@@ -23,7 +24,7 @@ export class ChangeYearWindowComponent implements OnInit {
       return;
     }
 
-    this.data.changeDataCallback(year, this.movieName);
+    this.data.changeDataCallback(year, this.movieName, this.movieId);
   }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ export class TheatersDataWindowComponent implements OnInit {
   movieName: string = this.data.oldName;
   watchYear: number = this.data.oldYear;
   monthSelectValue: number = this.data.oldMonth;
+  movieId: string = this.data.id;
   months = Months;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ITheatersWindow, private alertService: AlertService) { }
@@ -28,7 +29,7 @@ export class TheatersDataWindowComponent implements OnInit {
       return;
     }
 
-    this.data.changeTheatersDataCallback(this.watchYear, this.movieName, this.monthSelectValue);
+    this.data.changeTheatersDataCallback(this.watchYear, this.movieName, this.monthSelectValue, this.movieId);
   }
 
   ngOnInit(): void {

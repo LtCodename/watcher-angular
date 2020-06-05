@@ -11,8 +11,10 @@
                 [id]="filmingMovie.id"
                 [showReleasedButton]="true"
                 [showInfoButton]="true"
+                [showEditButton]="true"
                 (toggleWatchedMovie)="confirmMovieRelease(filmingMovie.name, filmingMovie.year, filmingMovie.director, filmingMovie.id)"
                 (deleteMovie)="confirmRemoveFromFilming(filmingMovie.id)"
+                (editMovie)="showEditYearWindow(filmingMovie.name, filmingMovie.year, filmingMovie.id)"
                 [mode]="'filmingMode'">
         </app-movie>
     </div>

@@ -1,11 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DirectorsService } from "../../directors/services/directors.service";
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MovieDataWindowComponent } from "../movie-data-window/movie-data-window.component";
-import { ChangeYearWindowComponent } from '../change-year-window/change-year-window.component';
-import { ConfirmWindowComponent } from '../confirm-window/confirm-window.component';
-import { AuthErrorMessage } from 'src/app/app.component';
-import { TheatersDataWindowComponent } from '../theaters-data-window/theaters-data-window.component';
 import { AlertService } from 'src/alert.service';
 
 @Component({
@@ -14,10 +10,6 @@ import { AlertService } from 'src/alert.service';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit {
-
-  yearChangeDialog: MatDialogRef<any>;
-  theatersChangeDialog: MatDialogRef<any>;
-  confirmWindow: MatDialogRef<any>;
 
   @Input() name: string = '';
   @Input() year: number;
@@ -34,11 +26,13 @@ export class MovieComponent implements OnInit {
   @Input() showInfoButton: boolean = false;
   @Input() showBookmarkButton: boolean = false;
   @Input() showReleasedButton: boolean = false;
+  @Input() showEditButton: boolean = false;
   @Input() releasedYear: number;
 
   @Output() toggleFavoritesMovie: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedMovie: EventEmitter<void> = new EventEmitter();
   @Output() deleteMovie: EventEmitter<void> = new EventEmitter();
+  @Output() editMovie: EventEmitter<void> = new EventEmitter();
 
   constructor(
       private directorsService: DirectorsService,
@@ -59,49 +53,8 @@ export class MovieComponent implements OnInit {
     this.deleteMovie.emit();
   }
 
-  changeDataCallback(newYear: number, newName: string): void {
-    this.directorsService.updateYearInFilming(this.id, newYear, newName).then(response => {
-      this.yearChangeDialog.close();
-      this.alertService.showAlert('Release year was updated!');
-    }).catch(error => {
-      this.yearChangeDialog.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  showEditYearWindow(): void {
-    this.yearChangeDialog = this.dialog.open(ChangeYearWindowComponent, {data: {
-      changeDataCallback: (year: number, name: string) => this.changeDataCallback(year, name),
-      oldYear: this.year,
-      oldName: this.name
-    }});
-  }
-
-  showEditTheatersWindow(): void {
-    this.theatersChangeDialog = this.dialog.open(TheatersDataWindowComponent, {data: {
-      changeTheatersDataCallback: (year: number, name: string, month: number) => this.changeTheatersDataCallback(year, name, month),
-      oldYear: this.year,
-      oldName: this.name,
-      oldMonth: this.month
-    }});
-  }
-
-  changeTheatersDataCallback(newYear: number, newName: string, newMonth: number): void {
-    this.directorsService.updateDataInTheaters(this.id, newYear, newName, newMonth).then(response => {
-      this.theatersChangeDialog.close();
-      this.alertService.showAlert('Information was updated!');
-    }).catch(error => {
-      this.theatersChangeDialog.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
+  edit(): void {
+    this.editMovie.emit();
   }
 
   getMovieData(): void {

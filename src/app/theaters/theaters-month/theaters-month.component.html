@@ -8,12 +8,14 @@
         [bookmarked]="movie.priority"
         [showInfoButton]="true"
         [showBookmarkButton]="true"
+        [showEditButton]="true"
         [month]="movie.month"
         [year]="movie.year"
         [releasedYear]="movie.releasedYear"
         (toggleWatchedMovie)="toggleWatchedTheaters(movie.id, !movie.watched)"
         (toggleFavoritesMovie)="toggleFavoritesTheaters(movie.id, !movie.priority)"
         (deleteMovie)="confirmRemoveFromTheaters(movie.id)"
+        (editMovie)="showEditTheatersWindow(movie.year, movie.name, movie.month, movie.id)"
         [mode]="'theatersMode'">
     </app-movie>
 </div>
