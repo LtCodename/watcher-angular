@@ -20,7 +20,6 @@ export class AdminPageComponent implements OnInit {
 
   login(): void {
     this.adminService.loginUser(this.email, this.password).then(res => {
-      console.log(res);
     }).catch(error => {
       console.log(error);
     })
@@ -28,7 +27,6 @@ export class AdminPageComponent implements OnInit {
 
   logout(): void {
     this.adminService.logoutUser().then(res => {
-      console.log(res);
     }).catch(error => {
       console.log(error);
     })

@@ -95,7 +95,6 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   }
 
   changeDataCallback(newYear: number, newName: string, id: string): void {
-    console.log(newName, newYear)
     this.filmingService.updateYearInFilming(id, newYear, newName).then(response => {
       this.yearChangeDialog.close();
       this.alertService.showAlert('Release year was updated!');
