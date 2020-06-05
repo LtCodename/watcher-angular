@@ -18,8 +18,6 @@
     <app-movie
         *ngFor="let movie of movies; let i = index"
         [showBookmarkButton]="true"
-        [showWatchedDirectorButton]="true"
-        [showInfoButton]="true"
         [bookmarked]="movie.bookmarked"
         [id]="movie.id"
         [year]="movie.year"

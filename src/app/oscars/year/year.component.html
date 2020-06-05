@@ -22,8 +22,6 @@
     <app-movie
         *ngFor="let movie of movies; let i = index"
         [mode]="'oscarsMode'"
-        [showInfoButton]="true"
-        [showWatchedOscarsButton]="true"
         [watched]="movie.watched"
         [id]="movie.id"
         (toggleWatchedMovie)="toggleWatchedOscars(movie.id, !movie.watched)"

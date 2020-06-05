@@ -20,14 +20,9 @@ export class MovieComponent implements OnInit {
   @Input() directorName: string = '';
   @Input() mode: string = '';
   @Input() month: number;
-  @Input() showWatchedDirectorButton: boolean = false;
-  @Input() showWatchedOscarsButton: boolean = false;
-  @Input() showWatchedTheatersButton: boolean = false;
-  @Input() showInfoButton: boolean = false;
-  @Input() showBookmarkButton: boolean = false;
-  @Input() showReleasedButton: boolean = false;
-  @Input() showEditButton: boolean = false;
   @Input() releasedYear: number;
+  @Input() showBookmarkButton: boolean = false;
+  @Input() showEditButton: boolean = false;
 
   @Output() toggleFavoritesMovie: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedMovie: EventEmitter<void> = new EventEmitter();
