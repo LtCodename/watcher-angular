@@ -26,7 +26,8 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
     private filmingService: FilmingService, 
     private directorsService: DirectorsService,
     private alertService: AlertService,
-    public dialog: MatDialog, ) {
+    public dialog: MatDialog
+    ) {
     this.filmingService.filming$
       .pipe(
           takeUntil(this.notifier),
@@ -51,7 +52,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   }
 
   markAsReleased(name: string, year: number, director: string, id: string): void {
-    this.directorsService.releaseMovie(name, year, director, id).subscribe((data) => {
+    this.filmingService.releaseMovie(name, year, director, id).subscribe((data) => {
       this.confirmWindow.close();
       this.alertService.showAlert('Updated successfully!');
     }, (error) => {
@@ -71,7 +72,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
   }
 
   removeMovieFromFilming(id: string): void {
-    this.directorsService.removeMovieFromFilming(id).then((data) => {
+    this.filmingService.removeMovieFromFilming(id).then((data) => {
       this.confirmWindow.close();
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
@@ -95,7 +96,7 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
 
   changeDataCallback(newYear: number, newName: string, id: string): void {
     console.log(newName, newYear)
-    this.directorsService.updateYearInFilming(id, newYear, newName).then(response => {
+    this.filmingService.updateYearInFilming(id, newYear, newName).then(response => {
       this.yearChangeDialog.close();
       this.alertService.showAlert('Release year was updated!');
     }).catch(error => {

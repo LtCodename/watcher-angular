@@ -33,14 +33,22 @@ export class OscarsService {
       .pipe(map(this.processSnapshot));
   }
 
-  deleteYear(id: string) {
-    return this.firestore.collection('oscarYears').doc(id).delete();
-  }
-
   getMovies() {
     return this.firestore.collection('oscarMovies')
       .snapshotChanges()
       .pipe(map(this.processSnapshot));
+  }
+
+  deleteYear(id: string) {
+    return this.firestore.collection('oscarYears').doc(id).delete();
+  }
+
+  toggleWatchedOscars(id: string, watched: boolean) {
+    return this.firestore.collection('oscarMovies').doc(id).update({ watched });
+  }
+
+  removeMovieFromOscars(id: string) {
+    return this.firestore.collection('oscarMovies').doc(id).delete();
   }
 
   private processSnapshot(data) {

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ITheaterMovie, MonthsNames } from 'src/interface';
-import { DirectorsService } from 'src/app/directors/services/directors.service';
 import { AlertService } from 'src/alert.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 import { TheatersDataWindowComponent } from 'src/app/components/theaters-data-window/theaters-data-window.component';
+import { TheatersService } from '../services/theaters.service';
 
 @Component({
   selector: 'app-theaters-month',
@@ -23,13 +23,13 @@ export class TheatersMonthComponent implements OnInit {
 
 
   constructor(
-    private directorsService: DirectorsService, 
+    private theatersService: TheatersService, 
     private alertService: AlertService, 
     private dialog: MatDialog
     ) { }
 
   toggleWatchedTheaters(id: string, watched: boolean): void {
-    this.directorsService.toggleWatchedTheaters(id, watched).then(response => {
+    this.theatersService.toggleWatchedTheaters(id, watched).then(response => {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
@@ -41,7 +41,7 @@ export class TheatersMonthComponent implements OnInit {
   }
 
   toggleFavoritesTheaters(id: string, bookmarked: boolean): void {
-    this.directorsService.toggleFavoritesTheaters(id, bookmarked).then(response => {
+    this.theatersService.toggleFavoritesTheaters(id, bookmarked).then(response => {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
@@ -59,7 +59,7 @@ export class TheatersMonthComponent implements OnInit {
   }
 
   removeMovieFromTheatres(id: string): void {
-    this.directorsService.removeMovieFromTheatres(id).then((data) => {
+    this.theatersService.removeMovieFromTheatres(id).then((data) => {
       this.confirmWindow.close();
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
@@ -83,7 +83,7 @@ export class TheatersMonthComponent implements OnInit {
   }
 
   changeTheatersDataCallback(newYear: number, newName: string, newMonth: number, id: string): void {
-    this.directorsService.updateDataInTheaters(id, newYear, newName, newMonth).then(response => {
+    this.theatersService.updateDataInTheaters(id, newYear, newName, newMonth).then(response => {
       this.theatersChangeDialog.close();
       this.alertService.showAlert('Information was updated!');
     }).catch(error => {

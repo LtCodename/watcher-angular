@@ -27,6 +27,22 @@ export class TheatersService {
         .pipe(map(this.processSnapshot));
   }
 
+  updateDataInTheaters(id: string, year: number, name: string, month: number) {
+    return this.firestore.collection('theaters').doc(id).update({ year, name, month });
+  }
+
+  toggleWatchedTheaters(id: string, watched: boolean) {
+    return this.firestore.collection('theaters').doc(id).update({ watched });
+  }
+
+  toggleFavoritesTheaters(id: string, bookmarked: boolean) {
+    return this.firestore.collection('theaters').doc(id).update({ priority: bookmarked });
+  }
+
+  removeMovieFromTheatres(id: string) {
+    return this.firestore.collection('theaters').doc(id).delete();
+  }
+
   private processSnapshot(data) {
     let finalResults = data.map((e) => ({
       id: e.payload.doc.id,

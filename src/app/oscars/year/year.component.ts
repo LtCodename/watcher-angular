@@ -5,7 +5,6 @@ import { OscarsService } from '../services/oscars.service';
 import { AuthErrorMessage } from 'src/app/app.component';
 import { IOscarMovie } from 'src/interface';
 import { AlertService } from 'src/alert.service';
-import { DirectorsService } from 'src/app/directors/services/directors.service';
 
 @Component({
   selector: 'app-year',
@@ -25,8 +24,7 @@ export class YearComponent implements OnInit, OnChanges {
   constructor(
     private dialog: MatDialog, 
     private oscarsService: OscarsService, 
-    private alertService: AlertService,
-    private directorsService: DirectorsService
+    private alertService: AlertService
     ) { }
 
   confirmRemove(): void {
@@ -71,7 +69,7 @@ export class YearComponent implements OnInit, OnChanges {
   }
 
   toggleWatchedOscars(id: string, watched: boolean): void {
-    this.directorsService.toggleWatchedOscars(id, watched).then(response => {
+    this.oscarsService.toggleWatchedOscars(id, watched).then(response => {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
       if (error.message && error.message === "Missing or insufficient permissions.") {
@@ -89,7 +87,7 @@ export class YearComponent implements OnInit, OnChanges {
   }
 
   removeMovieFromOscars(id: string): void {
-    this.directorsService.removeMovieFromOscars(id).then((data) => {
+    this.oscarsService.removeMovieFromOscars(id).then((data) => {
       this.confirmWindow.close();
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
