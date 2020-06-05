@@ -82,6 +82,26 @@ export class YearComponent implements OnInit, OnChanges {
     })
   }
 
+  confirmRemoveFromOscars(id: string): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.removeMovieFromOscars(id)
+    }});
+  }
+
+  removeMovieFromOscars(id: string): void {
+    this.directorsService.removeMovieFromOscars(id).then((data) => {
+      this.confirmWindow.close();
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
   ngOnInit(): void {
   }
 }

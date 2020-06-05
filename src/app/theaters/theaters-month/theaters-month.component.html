@@ -13,6 +13,7 @@
         [releasedYear]="movie.releasedYear"
         (toggleWatchedMovie)="toggleWatchedTheaters(movie.id, !movie.watched)"
         (toggleFavoritesMovie)="toggleFavoritesTheaters(movie.id, !movie.priority)"
+        (deleteMovie)="confirmRemoveFromTheaters(movie.id)"
         [mode]="'theatersMode'">
     </app-movie>
 </div>

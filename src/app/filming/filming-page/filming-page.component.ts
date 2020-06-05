@@ -62,6 +62,26 @@ export class FilmingPageComponent implements OnInit, OnDestroy {
     })
   }
 
+  confirmRemoveFromFilming(id: string): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.removeMovieFromFilming(id)
+    }});
+  }
+
+  removeMovieFromFilming(id: string): void {
+    this.directorsService.removeMovieFromFilming(id).then((data) => {
+      this.confirmWindow.close();
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
   ngOnInit(): void {
   }
 

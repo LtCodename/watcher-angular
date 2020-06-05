@@ -26,6 +26,7 @@
         [mode]="'directorsMode'"
         (toggleFavoritesMovie)="toggleFavoritesDirectors(movie.id, !movie.bookmarked)"
         (toggleWatchedMovie)="toggleWatchedDirectors(movie.id, !movie.watched)"
+        (deleteMovie)="confirmRemoveFromDirectors(movie.id)"
         [watched]="movie.watched"
         [name]="movie.name">
     </app-movie>

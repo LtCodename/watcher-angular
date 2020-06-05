@@ -3,6 +3,8 @@ import { ITheaterMovie, MonthsNames } from 'src/interface';
 import { DirectorsService } from 'src/app/directors/services/directors.service';
 import { AlertService } from 'src/alert.service';
 import { AuthErrorMessage } from 'src/app/app.component';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ConfirmWindowComponent } from 'src/app/components/confirm-window/confirm-window.component';
 
 @Component({
   selector: 'app-theaters-month',
@@ -15,8 +17,14 @@ export class TheatersMonthComponent implements OnInit {
   @Input() movies: ITheaterMovie[] = [];
 
   names = MonthsNames;
+  confirmWindow: MatDialogRef<any>;
 
-  constructor(private directorsService: DirectorsService, private alertService: AlertService) { }
+
+  constructor(
+    private directorsService: DirectorsService, 
+    private alertService: AlertService, 
+    private dialog: MatDialog
+    ) { }
 
   toggleWatchedTheaters(id: string, watched: boolean): void {
     this.directorsService.toggleWatchedTheaters(id, watched).then(response => {
@@ -34,6 +42,26 @@ export class TheatersMonthComponent implements OnInit {
     this.directorsService.toggleFavoritesTheaters(id, bookmarked).then(response => {
       this.alertService.showAlert('Updated successfully!');
     }).catch(error => {
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
+
+  confirmRemoveFromTheaters(id: string): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.removeMovieFromTheatres(id)
+    }});
+  }
+
+  removeMovieFromTheatres(id: string): void {
+    this.directorsService.removeMovieFromTheatres(id).then((data) => {
+      this.confirmWindow.close();
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
       if (error.message && error.message === "Missing or insufficient permissions.") {
         this.alertService.showAlert(AuthErrorMessage, 7000);
       } else {

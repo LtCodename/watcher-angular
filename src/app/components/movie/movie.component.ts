@@ -38,6 +38,7 @@ export class MovieComponent implements OnInit {
 
   @Output() toggleFavoritesMovie: EventEmitter<void> = new EventEmitter();
   @Output() toggleWatchedMovie: EventEmitter<void> = new EventEmitter();
+  @Output() deleteMovie: EventEmitter<void> = new EventEmitter();
 
   constructor(
       private directorsService: DirectorsService,
@@ -52,6 +53,10 @@ export class MovieComponent implements OnInit {
 
   toggleWatched(): void {
     this.toggleWatchedMovie.emit();
+  }
+
+  delete(): void {
+    this.deleteMovie.emit();
   }
 
   changeDataCallback(newYear: number, newName: string): void {
@@ -114,86 +119,6 @@ export class MovieComponent implements OnInit {
       this.dialog.open(MovieDataWindowComponent, {data: {
         movie: response
       }});
-    })
-  }
-
-  confirmRemoveFromDirectors(): void {
-    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
-      confirm: (id: string) => this.removeMovieFromDirectors(this.id)
-    }});
-  }
-
-  confirmRemoveFromFilming(): void {
-    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
-      confirm: (id: string) => this.removeMovieFromFilming(this.id)
-    }});
-  }
-
-  confirmRemoveFromOscars(): void {
-    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
-      confirm: (id: string) => this.removeMovieFromOscars(this.id)
-    }});
-  }
-
-  confirmRemoveFromTheaters(): void {
-    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
-      confirm: (id: string) => this.removeMovieFromTheatres(this.id)
-    }});
-  }
-
-  removeMovieFromOscars(id: string): void {
-    this.directorsService.removeMovieFromOscars(id).then((data) => {
-      this.confirmWindow.close();
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      this.confirmWindow.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  removeMovieFromTheatres(id: string): void {
-    this.directorsService.removeMovieFromTheatres(id).then((data) => {
-      this.confirmWindow.close();
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      this.confirmWindow.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  removeMovieFromDirectors(id: string): void {
-    this.directorsService.removeMovieFromDirectors(id).then((data) => {
-      this.confirmWindow.close();
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      this.confirmWindow.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
-    })
-  }
-
-  removeMovieFromFilming(id: string): void {
-    this.directorsService.removeMovieFromFilming(id).then((data) => {
-      this.confirmWindow.close();
-      this.alertService.showAlert('Updated successfully!');
-    }).catch(error => {
-      this.confirmWindow.close();
-      if (error.message && error.message === "Missing or insufficient permissions.") {
-        this.alertService.showAlert(AuthErrorMessage, 7000);
-      } else {
-        this.alertService.showAlert("Error!");
-      }
     })
   }
 

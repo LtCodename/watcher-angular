@@ -92,4 +92,24 @@ export class DirectorComponent implements OnInit, OnChanges {
       }
     })
   }
+
+  confirmRemoveFromDirectors(id: string): void {
+    this.confirmWindow = this.dialog.open(ConfirmWindowComponent, {data: {
+      confirm: () => this.removeMovieFromDirectors(id)
+    }});
+  }
+
+  removeMovieFromDirectors(id: string): void {
+    this.directorsService.removeMovieFromDirectors(id).then((data) => {
+      this.confirmWindow.close();
+      this.alertService.showAlert('Updated successfully!');
+    }).catch(error => {
+      this.confirmWindow.close();
+      if (error.message && error.message === "Missing or insufficient permissions.") {
+        this.alertService.showAlert(AuthErrorMessage, 7000);
+      } else {
+        this.alertService.showAlert("Error!");
+      }
+    })
+  }
 }
