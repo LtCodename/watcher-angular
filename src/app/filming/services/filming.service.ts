@@ -33,9 +33,9 @@ export class FilmingService {
 
   releaseMovie(name: string, year: number, director: string, idToRemove: string ) {
     let addToDirectors = this.firestore.collection('movies').add({
-        name,
-        year,
-        director
+      name,
+      year,
+      director
     })
 
     let removeFromFilming = this.firestore.collection('filming').doc(idToRemove).delete();
